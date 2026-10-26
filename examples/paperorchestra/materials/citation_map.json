@@ -1,0 +1,23 @@
+{
+  "source0ebb429fa86d481c2630": {
+    "abstract": "No independently verified abstract supplied; do not invent literature claims.",
+    "authors": [],
+    "source_id": "task",
+    "title": "pilot",
+    "year": ""
+  },
+  "source35a84c6c20a979f58c2a": {
+    "abstract": "No independently verified abstract supplied; do not invent literature claims.",
+    "authors": [],
+    "source_id": "scientisttwo",
+    "title": "ScientistTwo",
+    "year": ""
+  },
+  "source6b7f8c3cf53f446482d3": {
+    "abstract": "No independently verified abstract supplied; do not invent literature claims.",
+    "authors": [],
+    "source_id": "sklearn-toy",
+    "title": "scikit-learn toy datasets",
+    "year": ""
+  }
+}

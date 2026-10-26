@@ -1,0 +1,225 @@
+name: Release verification
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release-verification-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  PYTHONUNBUFFERED: '1'
+  UV_PYTHON: '3.12'
+
+jobs:
+  quality-and-package:
+    name: Offline tests and installed wheel
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@6b9c6063abd6010835644d4c2e1bef4cf5cd0fca # v6.0.1
+        with:
+          version: '0.7.8'
+          python-version: '3.12'
+      - name: Install frozen development environment
+        run: uv sync --frozen --group dev
+      - name: Lint source, tests, and release verifier
+        run: uv run --frozen ruff check src tests scripts/verify_release.py
+      - name: Run offline unit and fixture tests
+        run: >-
+          uv run --frozen pytest -q -m 'not container and not native_container'
+          --junitxml=.release-validation/offline-tests.xml
+      - name: Build wheel and source distribution
+        run: uv build --sdist --wheel --out-dir dist
+      - name: Install wheel outside the checkout using frozen runtime dependencies
+        run: |
+          uv export --frozen --no-dev --no-emit-project --format requirements-txt --output-file "$RUNNER_TEMP/runtime-requirements.txt"
+          uv venv --python 3.12 "$RUNNER_TEMP/wheel-venv"
+          uv pip sync --python "$RUNNER_TEMP/wheel-venv/bin/python" "$RUNNER_TEMP/runtime-requirements.txt"
+          uv pip install --python "$RUNNER_TEMP/wheel-venv/bin/python" --no-deps dist/*.whl
+          cd "$RUNNER_TEMP"
+          "$RUNNER_TEMP/wheel-venv/bin/python" -I "$GITHUB_WORKSPACE/scripts/verify_release.py" package --source-root "$GITHUB_WORKSPACE" --output "$GITHUB_WORKSPACE/.release-validation/package-summary.json"
+      - name: Preserve package and test summaries
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: package-verification
+          path: |
+            dist/*
+            .release-validation/offline-tests.xml
+            .release-validation/package-summary.json
+          include-hidden-files: true
+          retention-days: 14
+
+  pinned-upstream-fixtures:
+    name: Required pinned upstream integration fixtures
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      SCIENTISTTWO_REQUIRE_UPSTREAMS: all
+      SCIENTISTTWO_PAPERORCHESTRA_ROOT: ${{ github.workspace }}/.upstream/paper-orchestra
+      SCIENTISTTWO_MLAGENTBENCH_ROOT: ${{ github.workspace }}/.upstream/MLAgentBench
+      SCIENTISTTWO_MLEBENCH_ROOT: ${{ github.workspace }}/.upstream/mle-bench
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      # Only pinned public source is fetched. LFS data, submodules, credentials,
+      # benchmark datasets, and provider services are not required for this job.
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          repository: google-research/paper-orchestra
+          ref: ca1b3fa01c2970fc7cda32d16245db38d57b3f56
+          path: .upstream/paper-orchestra
+          persist-credentials: false
+          lfs: false
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          repository: snap-stanford/MLAgentBench
+          ref: 5d71205cc20a8e95d43aa7cb7120e89ca3323e31
+          path: .upstream/MLAgentBench
+          persist-credentials: false
+          lfs: false
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          repository: openai/mle-bench
+          ref: 507f92e1138bb6e40dac5c6ee7a6758e6424bf97
+          path: .upstream/mle-bench
+          persist-credentials: false
+          lfs: false
+      - uses: astral-sh/setup-uv@6b9c6063abd6010835644d4c2e1bef4cf5cd0fca # v6.0.1
+        with:
+          version: '0.7.8'
+          python-version: '3.12'
+      - name: Install frozen development environment with preparation fixtures
+        run: uv sync --frozen --group dev --extra preparation
+      - name: Run real upstream control flow with scripted model and PDF services
+        run: >-
+          uv run --frozen pytest -q -m 'not container and not native_container'
+          --junitxml=.release-validation/upstream-tests.xml
+      - name: Reject skipped or missing integration coverage
+        run: >-
+          uv run --frozen python scripts/verify_release.py junit
+          --input .release-validation/upstream-tests.xml
+          --output .release-validation/upstream-summary.json
+      - name: Preserve integration summaries
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: pinned-upstream-verification
+          path: |
+            .release-validation/upstream-tests.xml
+            .release-validation/upstream-summary.json
+          include-hidden-files: true
+          retention-days: 14
+
+  bundled-paperorchestra-container:
+    name: Installed bundled PaperOrchestra and real offline PDF
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    env:
+      PDF_BASE_TAG: python:3.12.12-slim-bookworm
+      PDF_DEBIAN_SNAPSHOT: 20261025T000000Z
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@6b9c6063abd6010835644d4c2e1bef4cf5cd0fca # v6.0.1
+        with:
+          version: '0.7.8'
+          python-version: '3.12'
+      - name: Install frozen environment and build release wheel
+        run: |
+          uv sync --frozen --group dev
+          uv build --wheel --out-dir dist
+          uv export --frozen --no-dev --no-emit-project --format requirements-txt --output-file "$RUNNER_TEMP/runtime-requirements.txt"
+          uv venv --python 3.12 "$RUNNER_TEMP/wheel-venv"
+          uv pip sync --python "$RUNNER_TEMP/wheel-venv/bin/python" "$RUNNER_TEMP/runtime-requirements.txt"
+          uv pip install --python "$RUNNER_TEMP/wheel-venv/bin/python" --no-deps dist/*.whl
+      - name: Build CPU worker image (explicit dependency download step)
+        run: docker build --pull -t scientisttwo-worker:release-ci .
+      - name: Resolve and record the official PDF base image
+        run: |
+          docker pull "$PDF_BASE_TAG"
+          task_base_ref="$(docker image inspect "$PDF_BASE_TAG" --format '{{index .RepoDigests 0}}')"
+          task_base_digest="${task_base_ref##*@}"
+          test "${task_base_digest#sha256:}" != "$task_base_digest"
+          printf 'PDF_BASE=%s@%s\n' "$PDF_BASE_TAG" "$task_base_digest" >> "$GITHUB_ENV"
+          mkdir -p .release-validation
+          printf '%s@%s\n' "$PDF_BASE_TAG" "$task_base_digest" > .release-validation/pdf-base-image.txt
+      - name: Build pinned PDF image (explicit TeX and Poppler download step)
+        run: |
+          docker build --build-arg PYTHON_BASE="$PDF_BASE" --build-arg DEBIAN_SNAPSHOT="$PDF_DEBIAN_SNAPSHOT" -f docker/paperorchestra/Dockerfile -t scientisttwo-paperorchestra:release-ci .
+          task_pdf_image="$(docker image inspect scientisttwo-paperorchestra:release-ci --format '{{.Id}}')"
+          printf 'PDF_IMAGE=%s\n' "$task_pdf_image" >> "$GITHUB_ENV"
+          docker run --rm --pull=never --network=none --read-only "$task_pdf_image" cat /usr/local/share/scientisttwo-paperorchestra-packages.txt > .release-validation/pdf-package-inventory.txt
+      - name: Verify bundled sources in the installed wheel
+        working-directory: ${{ runner.temp }}
+        run: >-
+          "$RUNNER_TEMP/wheel-venv/bin/python" -I "$GITHUB_WORKSPACE/scripts/verify_release.py"
+          package --source-root "$GITHUB_WORKSPACE"
+          --output "$GITHUB_WORKSPACE/.release-validation/bundled-package-summary.json"
+      - name: Run bundled writing engine, real PDF, audit, and no-op resume
+        working-directory: ${{ runner.temp }}
+        run: >-
+          "$RUNNER_TEMP/wheel-venv/bin/python" -I "$GITHUB_WORKSPACE/scripts/verify_release.py"
+          container --task "$GITHUB_WORKSPACE/examples/quickstart.json"
+          --image scientisttwo-worker:release-ci --writer-backend paperorchestra
+          --max-prompt-chars 1000000
+          --compiler-image "$PDF_IMAGE"
+          --work-dir "$GITHUB_WORKSPACE/.release-validation"
+          --output "$GITHUB_WORKSPACE/.release-validation/bundled-paperorchestra-summary.json"
+      - name: Preserve bundled engine and image provenance summaries
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: bundled-paperorchestra-verification
+          path: |
+            .release-validation/bundled-package-summary.json
+            .release-validation/bundled-paperorchestra-summary.json
+            .release-validation/pdf-base-image.txt
+            .release-validation/pdf-package-inventory.txt
+          include-hidden-files: true
+          if-no-files-found: warn
+          retention-days: 14
+
+  cpu-container:
+    name: Real offline CPU campaign, audit, and resume
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@6b9c6063abd6010835644d4c2e1bef4cf5cd0fca # v6.0.1
+        with:
+          version: '0.7.8'
+          python-version: '3.12'
+      - name: Install frozen environment
+        run: uv sync --frozen --group dev
+      - name: Build CPU worker image (explicit dependency download step)
+        run: docker build --pull -t scientisttwo-worker:release-ci .
+      - name: Run generated CPU task with zero live model calls
+        run: >-
+          uv run --frozen python scripts/verify_release.py container
+          --task examples/quickstart.json --image scientisttwo-worker:release-ci
+          --output .release-validation/container-summary.json
+      - name: Preserve bounded verification summary
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: offline-cpu-verification
+          path: .release-validation/container-summary.json
+          include-hidden-files: true
+          if-no-files-found: warn
+          retention-days: 14

@@ -1,0 +1,17 @@
+{
+  "schema_version": 2,
+  "name": "quadratic-cpu",
+  "question": "Exercise the research workflow using established regression methods on generated quadratic data. This demonstration makes no novelty claim.",
+  "adapter": "regression",
+  "datasets": ["quadratic"],
+  "subset_datasets": ["quadratic"],
+  "seeds": [0, 1, 2],
+  "data_seed": 1729,
+  "split_seed": 0,
+  "subset_fraction": 0.5,
+  "primary_metric": "mse",
+  "metric_directions": {"mse": "minimize", "mae": "minimize"},
+  "guardrails": {},
+  "improvement_epsilon": 0.0001,
+  "quality_tolerance": 0.00000001
+}

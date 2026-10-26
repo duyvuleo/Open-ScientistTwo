@@ -1,0 +1,5 @@
+# Worker builds accept only the dependency recipe. Source, credentials, upstream
+# checkouts, prepared data, and run evidence never enter this build context.
+*
+!Dockerfile
+!requirements-worker.txt

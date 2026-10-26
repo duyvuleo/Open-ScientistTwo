@@ -1,0 +1,8 @@
+{
+  "source_iso": "https://ftp.math.utah.edu/pub/tex/historic/systems/texlive/2009/texlive2009-20091107.iso",
+  "path": "texmf-dist/source/latex/natbib/natbib.dtx",
+  "retrieval": "Bounded HTTP range reads; entire ISO not downloaded or verified",
+  "version": "2009/07/16 8.31",
+  "sha256": "d7e80d7d4fd0899383dde263703a3fa12563c74d18e53ea63b5761fb08be57ae",
+  "bytes": 248383
+}

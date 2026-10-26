@@ -1,0 +1,35 @@
+cff-version: 1.2.0
+message: >-
+  Cite the repository revision when using this independent experimental
+  implementation. Cite the ScientistTwo paper separately for the original method.
+title: Open-ScientistTwo
+type: software
+license: MIT
+authors:
+  - name: Open-ScientistTwo contributors
+repository-code: https://github.com/duyvuleo/Open-ScientistTwo
+url: https://github.com/duyvuleo/Open-ScientistTwo
+abstract: >-
+  An unofficial experimental implementation of a persistent, auditable research
+  workflow inspired by ScientistTwo, with offline scripted agents, isolated
+  experiments, task adapters, and optional live agents and PaperOrchestra writing.
+references:
+  - type: article
+    title: "ScientistTwo: Pioneering the Human Knowledge Frontier with Autonomous AI"
+    authors:
+      - family-names: Nam
+        given-names: Jaehyun
+      - family-names: Yoon
+        given-names: Jinsung
+      - family-names: Pan
+        given-names: Yanzhou
+      - family-names: Wang
+        given-names: Yubo
+      - family-names: Meng
+        given-names: Rui
+      - family-names: Ranganathan
+        given-names: Parthasarathy
+      - family-names: Pfister
+        given-names: Tomas
+    year: 2026
+    url: https://arxiv.org/abs/2609.19644

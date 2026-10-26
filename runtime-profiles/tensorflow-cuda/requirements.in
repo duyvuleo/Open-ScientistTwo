@@ -1,0 +1,6 @@
+tensorflow[and-cuda]==2.15.1
+keras==2.15.0
+numpy==1.26.4
+pandas==2.2.3
+scikit-learn==1.5.2
+Pillow==11.0.0

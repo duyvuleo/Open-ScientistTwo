@@ -1,0 +1,48 @@
+{
+  "scientisttwo": {
+    "arxiv_id": null,
+    "authors": [],
+    "content_status": "metadata_only",
+    "doi": null,
+    "id": "scientisttwo",
+    "metadata_status": "supplied",
+    "title": "ScientistTwo",
+    "url": "https://arxiv.org/abs/2609.19644",
+    "verification": {
+      "content_identity": "unverified",
+      "metadata_existence": "unverified",
+      "scope": "Metadata retrieval identity and available passage bytes only; no citation entailment",
+      "support": "unverified"
+    },
+    "year": null
+  },
+  "sklearn-toy": {
+    "arxiv_id": null,
+    "authors": [],
+    "content_status": "metadata_only",
+    "doi": null,
+    "id": "sklearn-toy",
+    "metadata_status": "supplied",
+    "title": "scikit-learn toy datasets",
+    "url": "https://scikit-learn.org/stable/datasets/toy_dataset.html",
+    "verification": {
+      "content_identity": "unverified",
+      "metadata_existence": "unverified",
+      "scope": "Metadata retrieval identity and available passage bytes only; no citation entailment",
+      "support": "unverified"
+    },
+    "year": null
+  },
+  "task": {
+    "content_status": "supplied_excerpt",
+    "id": "task",
+    "metadata_status": "supplied",
+    "title": "pilot",
+    "verification": {
+      "content_identity": "pass",
+      "metadata_existence": "unverified",
+      "scope": "Metadata retrieval identity and available passage bytes only; no citation entailment",
+      "support": "unverified"
+    }
+  }
+}

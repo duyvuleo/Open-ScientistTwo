@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "status": "resolved_not_runtime_validated",
+  "resolver": "uv 0.7.8",
+  "target_platform": "x86_64-manylinux_2_28",
+  "python": "3.10",
+  "requested_sha256": "3e02f4fd1af250d94e1656d2496500eb524aad73330b97028a6e9f29ce60fe2b",
+  "lock_sha256": "5159bc35099b2533306945a7e43335c8559c816fd0cda87bc1fb501d7eff7e5b",
+  "package_count": 85,
+  "indexes": [
+    "https://pypi.org/simple",
+    "https://storage.googleapis.com/jax-releases/jax_cuda_releases.html"
+  ],
+  "build_status": "unverified",
+  "gpu_probe_status": "unverified"
+}

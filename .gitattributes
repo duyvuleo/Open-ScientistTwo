@@ -1,0 +1,3 @@
+src/scientisttwo/_vendor/** -text -whitespace linguist-vendored
+src/scientisttwo/research/templates/iclr2025/** -text -whitespace linguist-vendored
+licenses/** -text -whitespace

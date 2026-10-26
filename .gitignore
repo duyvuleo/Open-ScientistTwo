@@ -1,0 +1,37 @@
+# Local environments and Python tooling
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+
+# Build products, downloaded upstreams, prepared data, and private run evidence
+build/
+dist/
+.cache/
+.upstream/
+.testbed/
+.release-validation/
+artifact-output/
+runs/
+outputs/
+evidence/
+jobs/
+.tools/
+.runtime/
+.deployment/
+.staging/
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
+
+# Local configuration and credentials
+.env
+.env.*
+!.env.example
+*.local.json
+.DS_Store

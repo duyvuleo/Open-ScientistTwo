@@ -1,0 +1,10 @@
+{
+  "source": "local supplied PaperOrchestra checkout",
+  "revision": "ca1b3fa01c2970fc7cda32d16245db38d57b3f56",
+  "files": {
+    "iclr2025_conference.sty": "9e280a9ff99be84ad190f5cafe047a1a32c2eeb9ca14232ddceae42d8489c697",
+    "iclr2025_conference.bst": "2d67552db7ed38ccfccb5957b52f95656e25c249724761d3cf5f7922ad1844c5",
+    "LICENSE": "58d1e17ffe5109a7ae296caafcadfdbe6a7d176f0bc4ab01e12a689b0499d8bd"
+  },
+  "scope": "Template assets only; upstream writer engine not invoked"
+}

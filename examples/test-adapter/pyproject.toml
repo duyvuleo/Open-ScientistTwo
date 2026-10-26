@@ -1,0 +1,14 @@
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[project]
+name = "scientisttwo-test-adapter"
+version = "0.1.0"
+requires-python = ">=3.12"
+
+[project.entry-points."scientisttwo.native_development"]
+installed-test-csv = "scientisttwo_test_adapter:InstalledCSV"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/scientisttwo_test_adapter"]

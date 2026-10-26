@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "status": "resolved_not_runtime_validated",
+  "resolver": "uv 0.7.8",
+  "target_platform": "x86_64-manylinux_2_28",
+  "python": "3.11",
+  "requested_sha256": "d06087d3b10f81aeef9a518180cb819babc6b9e1c9b1a272f2d4560daab4d019",
+  "lock_sha256": "6146514248ab980c2cc3b697073ccdc52b10e9ec133fab7afe2c938f0cbc1d56",
+  "package_count": 64,
+  "indexes": [
+    "https://pypi.org/simple"
+  ],
+  "build_status": "unverified",
+  "gpu_probe_status": "unverified"
+}

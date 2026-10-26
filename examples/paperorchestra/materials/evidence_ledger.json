@@ -1,0 +1,1265 @@
+{
+  "claim_scope": "Numerical provenance and source identity only; scientific support unverified",
+  "control_context": [],
+  "entries": {
+    "history:2d31bb3f90bf29dd4fba8117": {
+      "decision": {
+        "decision": "Engineer",
+        "reason": "Improvement rule or guardrail not met"
+      },
+      "execution_status": "success",
+      "hypothesis": "Test a nonlinear kernel under the same data protocol.",
+      "kind": "research_history",
+      "measurement_ids": [
+        "measurement:2f4e990e5650ae613e83747e",
+        "measurement:3d0eea8dc1805c6dd4545f9c"
+      ],
+      "observation_id": "search/1/0/subset/0",
+      "observation_ref": "artifacts/2bdb6f956d068811f29deecc8208dc8449e77e440336f04396a75fa3bad6c7f6.json",
+      "parents": [],
+      "phase": "subset",
+      "protocol_hash": "1fcf45773a615cd026bc8dca2c10c0be7a9195738081d59fa8d0f7ed2dd77495",
+      "protocol_ref": "artifacts/1fcf45773a615cd026bc8dca2c10c0be7a9195738081d59fa8d0f7ed2dd77495.json",
+      "source_ref": "artifacts/fd628ff7915223bf0f7042eaea4ccc0bf2f013d1c9e265f6757b1cc15b55d4e5.json",
+      "support_scope": "Committed execution status and recorded scientific decision; decision correctness and causal support remain unverified",
+      "title": "seed-svc",
+      "trial_id": "search/1/0/subset/0",
+      "trial_ref": "artifacts/0cad92121146fadc2fbd4080a6065e6b58008088a64a4022987cf93bb70f5327.json"
+    },
+    "history:49a21220cfe4259bd7584e59": {
+      "decision": {
+        "decision": "Engineer",
+        "reason": "Improvement rule or guardrail not met"
+      },
+      "execution_status": "success",
+      "hypothesis": "Fixed standardized logistic regression reference. Refined using recorded trial feedback.",
+      "kind": "research_history",
+      "measurement_ids": [
+        "measurement:394d07f0a232e38350c02063",
+        "measurement:a3af866468f7dcd82f113403"
+      ],
+      "observation_id": "search/1/1/subset/0",
+      "observation_ref": "artifacts/8e41afcad6213d736b3f61735d3d2d8b297c5603f155e999316d0a4d1c171a39.json",
+      "parents": [
+        "search/0/0/subset/0",
+        "search/0/0/subset/1",
+        "search/0/1/subset/0",
+        "search/0/1/subset/1",
+        "baseline"
+      ],
+      "phase": "subset",
+      "protocol_hash": "1fcf45773a615cd026bc8dca2c10c0be7a9195738081d59fa8d0f7ed2dd77495",
+      "protocol_ref": "artifacts/1fcf45773a615cd026bc8dca2c10c0be7a9195738081d59fa8d0f7ed2dd77495.json",
+      "source_ref": "artifacts/f4272f35e0e45c58c7d85c3052c3f470b2b2128c4df8420e74540c8e5b2eab72.json",
+      "support_scope": "Committed execution status and recorded scientific decision; decision correctness and causal support remain unverified",
+      "title": "evolve-5652a077da418ddb",
+      "trial_id": "search/1/1/subset/0",
+      "trial_ref": "artifacts/459cee18a4d6b5212bcde2e6586f663ee7cc06536391033ea2d8433d50c4f915.json"
+    },
+    "history:4d2e01e54f541d63d45cc351": {
+      "decision": {
+        "decision": "Bad",
+        "reason": "Improvement rule or guardrail not met"
+      },
+      "execution_status": "success",
+      "hypothesis": "Test whether local neighborhoods improve classification.",
+      "kind": "research_history",
+      "measurement_ids": [
+        "measurement:8e08f07044fbb350e60a9c23",
+        "measurement:7fbfacb5c5f118b0f7105274"
+      ],
+      "observation_id": "search/0/1/subset/1",
+      "observation_ref": "artifacts/629736fddfd7b9e70b81b24f5b76623d1cc909c559bea60f2ff25b0bc13bec37.json",
+      "parents": [
+        "search/0/1/subset/0"
+      ],
+      "phase": "subset",
+      "protocol_hash": "1fcf45773a615cd026bc8dca2c10c0be7a9195738081d59fa8d0f7ed2dd77495",
+      "protocol_ref": "artifacts/1fcf45773a615cd026bc8dca2c10c0be7a9195738081d59fa8d0f7ed2dd77495.json",
+      "source_ref": "artifacts/36d2b80efadfd2d6428fd980896926d87a0f2fb674bc9e7de3f3d3c5ed23b877.json",
+      "support_scope": "Committed execution status and recorded scientific decision; decision correctness and causal support remain unverified",
+      "title": "seed-knn",
+      "trial_id": "search/0/1/subset/1",
+      "trial_ref": "artifacts/cb1b111c0a023d8c11ea41c7ddbc3cd750f46a5ce0359cd1cfcd445874bab1aa.json"
+    },
+    "history:9669035934d865122cb458cd": {
+      "decision": {
+        "decision": "Bad",
+        "reason": "Improvement rule or guardrail not met"
+      },
+      "execution_status": "success",
+      "hypothesis": "Test a nonlinear kernel under the same data protocol.",
+      "kind": "research_history",
+      "measurement_ids": [
+        "measurement:d3f68d5992143dcf59c098b9",
+        "measurement:ff83a532e5c33b38ce6d1f1e"
+      ],
+      "observation_id": "search/1/0/subset/1",
+      "observation_ref": "artifacts/af3b747ced107a2837354d4bd4f7cab0a80a8d15e16a42466fee7a43b1be9a0e.json",
+      "parents": [
+        "search/1/0/subset/0"
+      ],
+      "phase": "subset",
+      "protocol_hash": "1fcf45773a615cd026bc8dca2c10c0be7a9195738081d59fa8d0f7ed2dd77495",
+      "protocol_ref": "artifacts/1fcf45773a615cd026bc8dca2c10c0be7a9195738081d59fa8d0f7ed2dd77495.json",
+      "source_ref": "artifacts/984481f33e432339148a8cb4e5ac6d80390b3a9392c7194213d94ab55891dc5e.json",
+      "support_scope": "Committed execution status and recorded scientific decision; decision correctness and causal support remain unverified",
+      "title": "seed-svc",
+      "trial_id": "search/1/0/subset/1",
+      "trial_ref": "artifacts/905eb74b29eb66f0e4199ce3de0df599b06a42a9b38c18c5ad174dfb7c6ab210.json"
+    },
+    "history:b3a503e0b1cbc9bf6e777d31": {
+      "decision": {
+        "decision": "Engineer",
+        "reason": "Improvement rule or guardrail not met"
+      },
+      "execution_status": "success",
+      "hypothesis": "Test bounded-depth feature interactions.",
+      "kind": "research_history",
+      "measurement_ids": [
+        "measurement:77fdabde53a23c460c6e35ec",
+        "measurement:56acfb1cc51b7b7c8ec092fc"
+      ],
+      "observation_id": "search/0/0/subset/0",
+      "observation_ref": "artifacts/ca9e47bce413a1e5421b2406033cf98708dbf9f2d2dc471fc4b0f821c2773725.json",
+      "parents": [],
+      "phase": "subset",
+      "protocol_hash": "1fcf45773a615cd026bc8dca2c10c0be7a9195738081d59fa8d0f7ed2dd77495",
+      "protocol_ref": "artifacts/1fcf45773a615cd026bc8dca2c10c0be7a9195738081d59fa8d0f7ed2dd77495.json",
+      "source_ref": "artifacts/f412dd61dfb6d99872dff0f013c010ad4a278a7dd0de0f6e15f5b1296dad7655.json",
+      "support_scope": "Committed execution status and recorded scientific decision; decision correctness and causal support remain unverified",
+      "title": "seed-forest",
+      "trial_id": "search/0/0/subset/0",
+      "trial_ref": "artifacts/18fc503136c7d738ef7626c660aa415f6f2af199149f867112e1d9c78e7d94ca.json"
+    },
+    "history:c6574bd6656ea68834c7e338": {
+      "decision": {
+        "decision": "Bad",
+        "reason": "Improvement rule or guardrail not met"
+      },
+      "execution_status": "success",
+      "hypothesis": "Fixed standardized logistic regression reference. Refined using recorded trial feedback.",
+      "kind": "research_history",
+      "measurement_ids": [
+        "measurement:52711ebd23dca4f3ed66b1c0",
+        "measurement:3256bdc02df66af9cc37b99e"
+      ],
+      "observation_id": "search/1/1/subset/1",
+      "observation_ref": "artifacts/2b5808ed7e84dcde570abefe29e3e2033edd9156d4664dd384a0497f521569d0.json",
+      "parents": [
+        "search/1/1/subset/0"
+      ],
+      "phase": "subset",
+      "protocol_hash": "1fcf45773a615cd026bc8dca2c10c0be7a9195738081d59fa8d0f7ed2dd77495",
+      "protocol_ref": "artifacts/1fcf45773a615cd026bc8dca2c10c0be7a9195738081d59fa8d0f7ed2dd77495.json",
+      "source_ref": "artifacts/c0ad3ef4212f54ac8f89c7d3f4e63a98c16ad77d83ef89b7c3b126a5e0816e27.json",
+      "support_scope": "Committed execution status and recorded scientific decision; decision correctness and causal support remain unverified",
+      "title": "evolve-5652a077da418ddb",
+      "trial_id": "search/1/1/subset/1",
+      "trial_ref": "artifacts/2f4a8ad68d51349cfd3c63ff8fe482b1ff3377a1a186e5a0d579820153201be9.json"
+    },
+    "history:e9bd1e148ab588a06ead0908": {
+      "decision": {
+        "decision": "Bad",
+        "reason": "Improvement rule or guardrail not met"
+      },
+      "execution_status": "success",
+      "hypothesis": "Test bounded-depth feature interactions.",
+      "kind": "research_history",
+      "measurement_ids": [
+        "measurement:73f61807e84ceccc42d6baab",
+        "measurement:dd2c080a81b068527bcb0f90"
+      ],
+      "observation_id": "search/0/0/subset/1",
+      "observation_ref": "artifacts/f649bfc0901bb67a12c47f35ef82999fcd59ee49622d2cb27b3aa2c3cc0b5c21.json",
+      "parents": [
+        "search/0/0/subset/0"
+      ],
+      "phase": "subset",
+      "protocol_hash": "1fcf45773a615cd026bc8dca2c10c0be7a9195738081d59fa8d0f7ed2dd77495",
+      "protocol_ref": "artifacts/1fcf45773a615cd026bc8dca2c10c0be7a9195738081d59fa8d0f7ed2dd77495.json",
+      "source_ref": "artifacts/688752e1267c2d2ec6c4b917b42ce3f2f9ea8500dfc8042791f421bb68d58de6.json",
+      "support_scope": "Committed execution status and recorded scientific decision; decision correctness and causal support remain unverified",
+      "title": "seed-forest",
+      "trial_id": "search/0/0/subset/1",
+      "trial_ref": "artifacts/007036b4f6cd029d8b21f9a253979e899f883ab644012416e9c625d1aedd8a63.json"
+    },
+    "history:f5101b595251b20581853259": {
+      "decision": {
+        "decision": "Engineer",
+        "reason": "Improvement rule or guardrail not met"
+      },
+      "execution_status": "success",
+      "hypothesis": "Test whether local neighborhoods improve classification.",
+      "kind": "research_history",
+      "measurement_ids": [
+        "measurement:357227575bc1b55002782a4f",
+        "measurement:f3d9d9247c4bf78369699c71"
+      ],
+      "observation_id": "search/0/1/subset/0",
+      "observation_ref": "artifacts/db996c39b70c741e8ad6f5a6463307f43bda1e26c9563c1f4246e80153bbfe76.json",
+      "parents": [],
+      "phase": "subset",
+      "protocol_hash": "1fcf45773a615cd026bc8dca2c10c0be7a9195738081d59fa8d0f7ed2dd77495",
+      "protocol_ref": "artifacts/1fcf45773a615cd026bc8dca2c10c0be7a9195738081d59fa8d0f7ed2dd77495.json",
+      "source_ref": "artifacts/62abbd8a6f43018d81095aa0e20b022ee062f682d9499ba7919b58bfcf98df1f.json",
+      "support_scope": "Committed execution status and recorded scientific decision; decision correctness and causal support remain unverified",
+      "title": "seed-knn",
+      "trial_id": "search/0/1/subset/0",
+      "trial_ref": "artifacts/c64784b3c8151d12d251a04d5df307084a50450dc5c183ab70601c0efb835359.json"
+    },
+    "measurement:13c84b7e118e0a5e8484eeeb": {
+      "kind": "measured",
+      "metric": "macro_f1",
+      "numeric_provenance": "committed_trusted_observation; recomputation_is_separate",
+      "observation_id": "baseline/full",
+      "observation_ref": "artifacts/fa3edc09841f5d7e414d4d612f82af846b9dbc0f833923395a9177dc27d9c882.json",
+      "per_seed": [
+        {
+          "seed": 0,
+          "value": 0.9795743641073514
+        },
+        {
+          "seed": 1,
+          "value": 0.9795743641073514
+        },
+        {
+          "seed": 2,
+          "value": 0.9795743641073514
+        }
+      ],
+      "phase": "full",
+      "protocol_hash": "22c3066b7932a18133b9a31ec2a0a435f8222be320e58d89d3e75f9af86f99ba",
+      "source_ref": "artifacts/01dd7c45a733d69fa9c0e013d0a2bb23b94934d6bbdfd7daef92724975e23b76.json",
+      "value": 0.9795743641073514
+    },
+    "measurement:2f4e990e5650ae613e83747e": {
+      "kind": "measured",
+      "metric": "accuracy",
+      "numeric_provenance": "committed_trusted_observation; recomputation_is_separate",
+      "observation_id": "search/1/0/subset/0",
+      "observation_ref": "artifacts/2bdb6f956d068811f29deecc8208dc8449e77e440336f04396a75fa3bad6c7f6.json",
+      "per_seed": [
+        {
+          "seed": 0,
+          "value": 0.9833333333333334
+        }
+      ],
+      "phase": "subset",
+      "protocol_hash": "1fcf45773a615cd026bc8dca2c10c0be7a9195738081d59fa8d0f7ed2dd77495",
+      "source_ref": "artifacts/fd628ff7915223bf0f7042eaea4ccc0bf2f013d1c9e265f6757b1cc15b55d4e5.json",
+      "value": 0.9833333333333334
+    },
+    "measurement:3256bdc02df66af9cc37b99e": {
+      "kind": "measured",
+      "metric": "macro_f1",
+      "numeric_provenance": "committed_trusted_observation; recomputation_is_separate",
+      "observation_id": "search/1/1/subset/1",
+      "observation_ref": "artifacts/2b5808ed7e84dcde570abefe29e3e2033edd9156d4664dd384a0497f521569d0.json",
+      "per_seed": [
+        {
+          "seed": 0,
+          "value": 0.9832915622389307
+        }
+      ],
+      "phase": "subset",
+      "protocol_hash": "1fcf45773a615cd026bc8dca2c10c0be7a9195738081d59fa8d0f7ed2dd77495",
+      "source_ref": "artifacts/c0ad3ef4212f54ac8f89c7d3f4e63a98c16ad77d83ef89b7c3b126a5e0816e27.json",
+      "value": 0.9832915622389307
+    },
+    "measurement:357227575bc1b55002782a4f": {
+      "kind": "measured",
+      "metric": "accuracy",
+      "numeric_provenance": "committed_trusted_observation; recomputation_is_separate",
+      "observation_id": "search/0/1/subset/0",
+      "observation_ref": "artifacts/db996c39b70c741e8ad6f5a6463307f43bda1e26c9563c1f4246e80153bbfe76.json",
+      "per_seed": [
+        {
+          "seed": 0,
+          "value": 0.9694444444444444
+        }
+      ],
+      "phase": "subset",
+      "protocol_hash": "1fcf45773a615cd026bc8dca2c10c0be7a9195738081d59fa8d0f7ed2dd77495",
+      "source_ref": "artifacts/62abbd8a6f43018d81095aa0e20b022ee062f682d9499ba7919b58bfcf98df1f.json",
+      "value": 0.9694444444444444
+    },
+    "measurement:394d07f0a232e38350c02063": {
+      "kind": "measured",
+      "metric": "accuracy",
+      "numeric_provenance": "committed_trusted_observation; recomputation_is_separate",
+      "observation_id": "search/1/1/subset/0",
+      "observation_ref": "artifacts/8e41afcad6213d736b3f61735d3d2d8b297c5603f155e999316d0a4d1c171a39.json",
+      "per_seed": [
+        {
+          "seed": 0,
+          "value": 0.9833333333333334
+        }
+      ],
+      "phase": "subset",
+      "protocol_hash": "1fcf45773a615cd026bc8dca2c10c0be7a9195738081d59fa8d0f7ed2dd77495",
+      "source_ref": "artifacts/f4272f35e0e45c58c7d85c3052c3f470b2b2128c4df8420e74540c8e5b2eab72.json",
+      "value": 0.9833333333333334
+    },
+    "measurement:3d0eea8dc1805c6dd4545f9c": {
+      "kind": "measured",
+      "metric": "macro_f1",
+      "numeric_provenance": "committed_trusted_observation; recomputation_is_separate",
+      "observation_id": "search/1/0/subset/0",
+      "observation_ref": "artifacts/2bdb6f956d068811f29deecc8208dc8449e77e440336f04396a75fa3bad6c7f6.json",
+      "per_seed": [
+        {
+          "seed": 0,
+          "value": 0.9832915622389307
+        }
+      ],
+      "phase": "subset",
+      "protocol_hash": "1fcf45773a615cd026bc8dca2c10c0be7a9195738081d59fa8d0f7ed2dd77495",
+      "source_ref": "artifacts/fd628ff7915223bf0f7042eaea4ccc0bf2f013d1c9e265f6757b1cc15b55d4e5.json",
+      "value": 0.9832915622389307
+    },
+    "measurement:441702b3757dba8b4d2f0a7d": {
+      "kind": "measured",
+      "metric": "accuracy",
+      "numeric_provenance": "committed_trusted_observation; recomputation_is_separate",
+      "observation_id": "baseline/subset",
+      "observation_ref": "artifacts/e5fa89392504110efb57e1b3ce77e842171becde2fac5800a40e280d48f424b3.json",
+      "per_seed": [
+        {
+          "seed": 0,
+          "value": 0.9833333333333334
+        }
+      ],
+      "phase": "subset",
+      "protocol_hash": "1fcf45773a615cd026bc8dca2c10c0be7a9195738081d59fa8d0f7ed2dd77495",
+      "source_ref": "artifacts/01dd7c45a733d69fa9c0e013d0a2bb23b94934d6bbdfd7daef92724975e23b76.json",
+      "value": 0.9833333333333334
+    },
+    "measurement:52711ebd23dca4f3ed66b1c0": {
+      "kind": "measured",
+      "metric": "accuracy",
+      "numeric_provenance": "committed_trusted_observation; recomputation_is_separate",
+      "observation_id": "search/1/1/subset/1",
+      "observation_ref": "artifacts/2b5808ed7e84dcde570abefe29e3e2033edd9156d4664dd384a0497f521569d0.json",
+      "per_seed": [
+        {
+          "seed": 0,
+          "value": 0.9833333333333334
+        }
+      ],
+      "phase": "subset",
+      "protocol_hash": "1fcf45773a615cd026bc8dca2c10c0be7a9195738081d59fa8d0f7ed2dd77495",
+      "source_ref": "artifacts/c0ad3ef4212f54ac8f89c7d3f4e63a98c16ad77d83ef89b7c3b126a5e0816e27.json",
+      "value": 0.9833333333333334
+    },
+    "measurement:56acfb1cc51b7b7c8ec092fc": {
+      "kind": "measured",
+      "metric": "macro_f1",
+      "numeric_provenance": "committed_trusted_observation; recomputation_is_separate",
+      "observation_id": "search/0/0/subset/0",
+      "observation_ref": "artifacts/ca9e47bce413a1e5421b2406033cf98708dbf9f2d2dc471fc4b0f821c2773725.json",
+      "per_seed": [
+        {
+          "seed": 0,
+          "value": 0.9691822147962499
+        }
+      ],
+      "phase": "subset",
+      "protocol_hash": "1fcf45773a615cd026bc8dca2c10c0be7a9195738081d59fa8d0f7ed2dd77495",
+      "source_ref": "artifacts/f412dd61dfb6d99872dff0f013c010ad4a278a7dd0de0f6e15f5b1296dad7655.json",
+      "value": 0.9691822147962499
+    },
+    "measurement:5f08da831418203a841b1968": {
+      "kind": "measured",
+      "metric": "macro_f1",
+      "numeric_provenance": "committed_trusted_observation; recomputation_is_separate",
+      "observation_id": "negative/rebuttal/0/matched/2",
+      "observation_ref": "artifacts/ac2537e8eec9d420f9e832640cb3a7a76237e747eee0783cca02f895aaa2d3f0.json",
+      "per_seed": [
+        {
+          "seed": 3,
+          "value": 0.9795743641073514
+        },
+        {
+          "seed": 4,
+          "value": 0.9795743641073514
+        }
+      ],
+      "phase": "rebuttal",
+      "protocol_hash": "259f48ff7f1913cdf515eb777e8d8d667f9b35e42cd4275e5a8f4dabae26292d",
+      "source_ref": "artifacts/01dd7c45a733d69fa9c0e013d0a2bb23b94934d6bbdfd7daef92724975e23b76.json",
+      "value": 0.9795743641073514
+    },
+    "measurement:5fb633bfc107cbfbd70d0518": {
+      "kind": "measured",
+      "metric": "accuracy",
+      "numeric_provenance": "committed_trusted_observation; recomputation_is_separate",
+      "observation_id": "baseline/full",
+      "observation_ref": "artifacts/fa3edc09841f5d7e414d4d612f82af846b9dbc0f833923395a9177dc27d9c882.json",
+      "per_seed": [
+        {
+          "seed": 0,
+          "value": 0.979603837821108
+        },
+        {
+          "seed": 1,
+          "value": 0.979603837821108
+        },
+        {
+          "seed": 2,
+          "value": 0.979603837821108
+        }
+      ],
+      "phase": "full",
+      "protocol_hash": "22c3066b7932a18133b9a31ec2a0a435f8222be320e58d89d3e75f9af86f99ba",
+      "source_ref": "artifacts/01dd7c45a733d69fa9c0e013d0a2bb23b94934d6bbdfd7daef92724975e23b76.json",
+      "value": 0.979603837821108
+    },
+    "measurement:728ef6660ef91154390a4ebb": {
+      "kind": "measured",
+      "metric": "accuracy",
+      "numeric_provenance": "committed_trusted_observation; recomputation_is_separate",
+      "observation_id": "negative/rebuttal/0/matched/2",
+      "observation_ref": "artifacts/ac2537e8eec9d420f9e832640cb3a7a76237e747eee0783cca02f895aaa2d3f0.json",
+      "per_seed": [
+        {
+          "seed": 3,
+          "value": 0.979603837821108
+        },
+        {
+          "seed": 4,
+          "value": 0.979603837821108
+        }
+      ],
+      "phase": "rebuttal",
+      "protocol_hash": "259f48ff7f1913cdf515eb777e8d8d667f9b35e42cd4275e5a8f4dabae26292d",
+      "source_ref": "artifacts/01dd7c45a733d69fa9c0e013d0a2bb23b94934d6bbdfd7daef92724975e23b76.json",
+      "value": 0.979603837821108
+    },
+    "measurement:73f61807e84ceccc42d6baab": {
+      "kind": "measured",
+      "metric": "accuracy",
+      "numeric_provenance": "committed_trusted_observation; recomputation_is_separate",
+      "observation_id": "search/0/0/subset/1",
+      "observation_ref": "artifacts/f649bfc0901bb67a12c47f35ef82999fcd59ee49622d2cb27b3aa2c3cc0b5c21.json",
+      "per_seed": [
+        {
+          "seed": 0,
+          "value": 0.9694444444444444
+        }
+      ],
+      "phase": "subset",
+      "protocol_hash": "1fcf45773a615cd026bc8dca2c10c0be7a9195738081d59fa8d0f7ed2dd77495",
+      "source_ref": "artifacts/688752e1267c2d2ec6c4b917b42ce3f2f9ea8500dfc8042791f421bb68d58de6.json",
+      "value": 0.9694444444444444
+    },
+    "measurement:77fdabde53a23c460c6e35ec": {
+      "kind": "measured",
+      "metric": "accuracy",
+      "numeric_provenance": "committed_trusted_observation; recomputation_is_separate",
+      "observation_id": "search/0/0/subset/0",
+      "observation_ref": "artifacts/ca9e47bce413a1e5421b2406033cf98708dbf9f2d2dc471fc4b0f821c2773725.json",
+      "per_seed": [
+        {
+          "seed": 0,
+          "value": 0.9694444444444444
+        }
+      ],
+      "phase": "subset",
+      "protocol_hash": "1fcf45773a615cd026bc8dca2c10c0be7a9195738081d59fa8d0f7ed2dd77495",
+      "source_ref": "artifacts/f412dd61dfb6d99872dff0f013c010ad4a278a7dd0de0f6e15f5b1296dad7655.json",
+      "value": 0.9694444444444444
+    },
+    "measurement:7fbfacb5c5f118b0f7105274": {
+      "kind": "measured",
+      "metric": "macro_f1",
+      "numeric_provenance": "committed_trusted_observation; recomputation_is_separate",
+      "observation_id": "search/0/1/subset/1",
+      "observation_ref": "artifacts/629736fddfd7b9e70b81b24f5b76623d1cc909c559bea60f2ff25b0bc13bec37.json",
+      "per_seed": [
+        {
+          "seed": 0,
+          "value": 0.9562039155860667
+        }
+      ],
+      "phase": "subset",
+      "protocol_hash": "1fcf45773a615cd026bc8dca2c10c0be7a9195738081d59fa8d0f7ed2dd77495",
+      "source_ref": "artifacts/36d2b80efadfd2d6428fd980896926d87a0f2fb674bc9e7de3f3d3c5ed23b877.json",
+      "value": 0.9562039155860667
+    },
+    "measurement:8e08f07044fbb350e60a9c23": {
+      "kind": "measured",
+      "metric": "accuracy",
+      "numeric_provenance": "committed_trusted_observation; recomputation_is_separate",
+      "observation_id": "search/0/1/subset/1",
+      "observation_ref": "artifacts/629736fddfd7b9e70b81b24f5b76623d1cc909c559bea60f2ff25b0bc13bec37.json",
+      "per_seed": [
+        {
+          "seed": 0,
+          "value": 0.9555555555555555
+        }
+      ],
+      "phase": "subset",
+      "protocol_hash": "1fcf45773a615cd026bc8dca2c10c0be7a9195738081d59fa8d0f7ed2dd77495",
+      "source_ref": "artifacts/36d2b80efadfd2d6428fd980896926d87a0f2fb674bc9e7de3f3d3c5ed23b877.json",
+      "value": 0.9555555555555555
+    },
+    "measurement:a3af866468f7dcd82f113403": {
+      "kind": "measured",
+      "metric": "macro_f1",
+      "numeric_provenance": "committed_trusted_observation; recomputation_is_separate",
+      "observation_id": "search/1/1/subset/0",
+      "observation_ref": "artifacts/8e41afcad6213d736b3f61735d3d2d8b297c5603f155e999316d0a4d1c171a39.json",
+      "per_seed": [
+        {
+          "seed": 0,
+          "value": 0.9832915622389307
+        }
+      ],
+      "phase": "subset",
+      "protocol_hash": "1fcf45773a615cd026bc8dca2c10c0be7a9195738081d59fa8d0f7ed2dd77495",
+      "source_ref": "artifacts/f4272f35e0e45c58c7d85c3052c3f470b2b2128c4df8420e74540c8e5b2eab72.json",
+      "value": 0.9832915622389307
+    },
+    "measurement:d3f68d5992143dcf59c098b9": {
+      "kind": "measured",
+      "metric": "accuracy",
+      "numeric_provenance": "committed_trusted_observation; recomputation_is_separate",
+      "observation_id": "search/1/0/subset/1",
+      "observation_ref": "artifacts/af3b747ced107a2837354d4bd4f7cab0a80a8d15e16a42466fee7a43b1be9a0e.json",
+      "per_seed": [
+        {
+          "seed": 0,
+          "value": 0.9833333333333334
+        }
+      ],
+      "phase": "subset",
+      "protocol_hash": "1fcf45773a615cd026bc8dca2c10c0be7a9195738081d59fa8d0f7ed2dd77495",
+      "source_ref": "artifacts/984481f33e432339148a8cb4e5ac6d80390b3a9392c7194213d94ab55891dc5e.json",
+      "value": 0.9833333333333334
+    },
+    "measurement:d970554291a9459890296409": {
+      "kind": "measured",
+      "metric": "macro_f1",
+      "numeric_provenance": "committed_trusted_observation; recomputation_is_separate",
+      "observation_id": "baseline/subset",
+      "observation_ref": "artifacts/e5fa89392504110efb57e1b3ce77e842171becde2fac5800a40e280d48f424b3.json",
+      "per_seed": [
+        {
+          "seed": 0,
+          "value": 0.9832915622389307
+        }
+      ],
+      "phase": "subset",
+      "protocol_hash": "1fcf45773a615cd026bc8dca2c10c0be7a9195738081d59fa8d0f7ed2dd77495",
+      "source_ref": "artifacts/01dd7c45a733d69fa9c0e013d0a2bb23b94934d6bbdfd7daef92724975e23b76.json",
+      "value": 0.9832915622389307
+    },
+    "measurement:dd2c080a81b068527bcb0f90": {
+      "kind": "measured",
+      "metric": "macro_f1",
+      "numeric_provenance": "committed_trusted_observation; recomputation_is_separate",
+      "observation_id": "search/0/0/subset/1",
+      "observation_ref": "artifacts/f649bfc0901bb67a12c47f35ef82999fcd59ee49622d2cb27b3aa2c3cc0b5c21.json",
+      "per_seed": [
+        {
+          "seed": 0,
+          "value": 0.9691822147962499
+        }
+      ],
+      "phase": "subset",
+      "protocol_hash": "1fcf45773a615cd026bc8dca2c10c0be7a9195738081d59fa8d0f7ed2dd77495",
+      "source_ref": "artifacts/688752e1267c2d2ec6c4b917b42ce3f2f9ea8500dfc8042791f421bb68d58de6.json",
+      "value": 0.9691822147962499
+    },
+    "measurement:f3d9d9247c4bf78369699c71": {
+      "kind": "measured",
+      "metric": "macro_f1",
+      "numeric_provenance": "committed_trusted_observation; recomputation_is_separate",
+      "observation_id": "search/0/1/subset/0",
+      "observation_ref": "artifacts/db996c39b70c741e8ad6f5a6463307f43bda1e26c9563c1f4246e80153bbfe76.json",
+      "per_seed": [
+        {
+          "seed": 0,
+          "value": 0.9691822147962499
+        }
+      ],
+      "phase": "subset",
+      "protocol_hash": "1fcf45773a615cd026bc8dca2c10c0be7a9195738081d59fa8d0f7ed2dd77495",
+      "source_ref": "artifacts/62abbd8a6f43018d81095aa0e20b022ee062f682d9499ba7919b58bfcf98df1f.json",
+      "value": 0.9691822147962499
+    },
+    "measurement:ff83a532e5c33b38ce6d1f1e": {
+      "kind": "measured",
+      "metric": "macro_f1",
+      "numeric_provenance": "committed_trusted_observation; recomputation_is_separate",
+      "observation_id": "search/1/0/subset/1",
+      "observation_ref": "artifacts/af3b747ced107a2837354d4bd4f7cab0a80a8d15e16a42466fee7a43b1be9a0e.json",
+      "per_seed": [
+        {
+          "seed": 0,
+          "value": 0.9832915622389307
+        }
+      ],
+      "phase": "subset",
+      "protocol_hash": "1fcf45773a615cd026bc8dca2c10c0be7a9195738081d59fa8d0f7ed2dd77495",
+      "source_ref": "artifacts/984481f33e432339148a8cb4e5ac6d80390b3a9392c7194213d94ab55891dc5e.json",
+      "value": 0.9832915622389307
+    }
+  },
+  "figures": {
+    "figure:066af8bdf289b29c5879": {
+      "caption": "Individual seed measurements grouped only within the same protocol and metric.",
+      "kind": "per_seed_dot_plot",
+      "table_id": "table:066af8bdf289b29c5879"
+    },
+    "figure:1300df50fea04f67f98d": {
+      "caption": "Individual seed measurements grouped only within the same protocol and metric.",
+      "kind": "per_seed_dot_plot",
+      "table_id": "table:1300df50fea04f67f98d"
+    },
+    "figure:742824cb5f3045df1f83": {
+      "caption": "Individual seed measurements grouped only within the same protocol and metric.",
+      "kind": "per_seed_dot_plot",
+      "table_id": "table:742824cb5f3045df1f83"
+    },
+    "figure:83e6b3e0268a5fb0cdb1": {
+      "caption": "Individual seed measurements grouped only within the same protocol and metric.",
+      "kind": "per_seed_dot_plot",
+      "table_id": "table:83e6b3e0268a5fb0cdb1"
+    },
+    "figure:b92de479846c925748f1": {
+      "caption": "Individual seed measurements grouped only within the same protocol and metric.",
+      "kind": "per_seed_dot_plot",
+      "table_id": "table:b92de479846c925748f1"
+    },
+    "figure:d49a077afc3b4a242917": {
+      "caption": "Individual seed measurements grouped only within the same protocol and metric.",
+      "kind": "per_seed_dot_plot",
+      "table_id": "table:d49a077afc3b4a242917"
+    }
+  },
+  "includes_final": false,
+  "observations": {
+    "baseline/full": {
+      "code_ref": "artifacts/4cf1f0808caa6d08509de253a89d99a4d8b8825f949599c1c71be63f71f33816.json",
+      "observation_ref": "artifacts/fa3edc09841f5d7e414d4d612f82af846b9dbc0f833923395a9177dc27d9c882.json",
+      "phase": "full",
+      "prediction_refs": [
+        "artifacts/b2b58191976d85ea5df6924f26a4162ad6d2144114b7a6f697a4e1283f0dd844.json",
+        "artifacts/34b6e7e226f85b8b6d8c3e51fbd0d5f61e2f3af44278aa5ded6da559dce601ec.json",
+        "artifacts/2a09629345e92708bf7eb91f2879133fd177862608f2e2322a84a8da7d02e2ff.json"
+      ],
+      "protocol_hash": "22c3066b7932a18133b9a31ec2a0a435f8222be320e58d89d3e75f9af86f99ba",
+      "protocol_ref": "artifacts/22c3066b7932a18133b9a31ec2a0a435f8222be320e58d89d3e75f9af86f99ba.json",
+      "reason": "Trusted pilot scorer accepted the complete grid",
+      "receipt_refs": [
+        "artifacts/25a5b038971f1f3bae1482009616d52161fa3a9bc9ef0c4ec79cdc191d61d0b1.json"
+      ],
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "source_tree_ref": "artifacts/01dd7c45a733d69fa9c0e013d0a2bb23b94934d6bbdfd7daef92724975e23b76.json",
+      "status": "success"
+    },
+    "baseline/subset": {
+      "code_ref": "artifacts/4cf1f0808caa6d08509de253a89d99a4d8b8825f949599c1c71be63f71f33816.json",
+      "observation_ref": "artifacts/e5fa89392504110efb57e1b3ce77e842171becde2fac5800a40e280d48f424b3.json",
+      "phase": "subset",
+      "prediction_refs": [
+        "artifacts/b1603f51249997b5c941cf901237fa9142c1a4dde6d8f2ca7a7290b069843489.json"
+      ],
+      "protocol_hash": "1fcf45773a615cd026bc8dca2c10c0be7a9195738081d59fa8d0f7ed2dd77495",
+      "protocol_ref": "artifacts/1fcf45773a615cd026bc8dca2c10c0be7a9195738081d59fa8d0f7ed2dd77495.json",
+      "reason": "Trusted pilot scorer accepted the complete grid",
+      "receipt_refs": [
+        "artifacts/ba767733af136b9c7aafce313eda0020810d8d0e6f867ef07308b41a545fccf4.json"
+      ],
+      "seeds": [
+        0
+      ],
+      "source_tree_ref": "artifacts/01dd7c45a733d69fa9c0e013d0a2bb23b94934d6bbdfd7daef92724975e23b76.json",
+      "status": "success"
+    },
+    "negative/rebuttal/0/matched/2": {
+      "code_ref": "artifacts/4cf1f0808caa6d08509de253a89d99a4d8b8825f949599c1c71be63f71f33816.json",
+      "observation_ref": "artifacts/ac2537e8eec9d420f9e832640cb3a7a76237e747eee0783cca02f895aaa2d3f0.json",
+      "phase": "rebuttal",
+      "prediction_refs": [
+        "artifacts/723374626526ac6d77742f729b0c1c49f094bda56f36766edcedf4850f1a34a8.json",
+        "artifacts/6319b120f947330c6b82e4c9398d7b07107a3af508751a5c22e83fce495bad24.json"
+      ],
+      "protocol_hash": "259f48ff7f1913cdf515eb777e8d8d667f9b35e42cd4275e5a8f4dabae26292d",
+      "protocol_ref": "artifacts/259f48ff7f1913cdf515eb777e8d8d667f9b35e42cd4275e5a8f4dabae26292d.json",
+      "reason": "Trusted pilot scorer accepted the complete grid",
+      "receipt_refs": [
+        "artifacts/0a0262cc5103176cbe230a872edd0a159d9c8aae54175cfaf7136b2386cf043d.json"
+      ],
+      "seeds": [
+        3,
+        4
+      ],
+      "source_tree_ref": "artifacts/01dd7c45a733d69fa9c0e013d0a2bb23b94934d6bbdfd7daef92724975e23b76.json",
+      "status": "success"
+    },
+    "search/0/0/subset/0": {
+      "code_ref": "artifacts/c5d508ca89679ec5d0297319b9eb6bb97fbf711621d2db5d53f78efe5ebd15ae.json",
+      "observation_ref": "artifacts/ca9e47bce413a1e5421b2406033cf98708dbf9f2d2dc471fc4b0f821c2773725.json",
+      "phase": "subset",
+      "prediction_refs": [
+        "artifacts/2055558db47e36ac6248e8cf2a4739359bd6ee879053230287cdc858f63cca2a.json"
+      ],
+      "protocol_hash": "1fcf45773a615cd026bc8dca2c10c0be7a9195738081d59fa8d0f7ed2dd77495",
+      "protocol_ref": "artifacts/1fcf45773a615cd026bc8dca2c10c0be7a9195738081d59fa8d0f7ed2dd77495.json",
+      "reason": "Trusted pilot scorer accepted the complete grid",
+      "receipt_refs": [
+        "artifacts/c829011c471988979db7b0d30c8c12d7c07ff7b8c19928f5d5f52f3592bebbbd.json"
+      ],
+      "seeds": [
+        0
+      ],
+      "source_tree_ref": "artifacts/f412dd61dfb6d99872dff0f013c010ad4a278a7dd0de0f6e15f5b1296dad7655.json",
+      "status": "success"
+    },
+    "search/0/0/subset/1": {
+      "code_ref": "artifacts/d99bd85e4af8c4596962e36012ef3d131121b2d0e370ff6490393d31573be980.json",
+      "observation_ref": "artifacts/f649bfc0901bb67a12c47f35ef82999fcd59ee49622d2cb27b3aa2c3cc0b5c21.json",
+      "phase": "subset",
+      "prediction_refs": [
+        "artifacts/b0765a78fcc08f1a9bdda3cd4592f422981a99cfdd44b65707377623c9b86a65.json"
+      ],
+      "protocol_hash": "1fcf45773a615cd026bc8dca2c10c0be7a9195738081d59fa8d0f7ed2dd77495",
+      "protocol_ref": "artifacts/1fcf45773a615cd026bc8dca2c10c0be7a9195738081d59fa8d0f7ed2dd77495.json",
+      "reason": "Trusted pilot scorer accepted the complete grid",
+      "receipt_refs": [
+        "artifacts/ae8f7cd8d4402c09cd81606c6850af9f660190a9e94fcfda2253bab4a9a55a7a.json"
+      ],
+      "seeds": [
+        0
+      ],
+      "source_tree_ref": "artifacts/688752e1267c2d2ec6c4b917b42ce3f2f9ea8500dfc8042791f421bb68d58de6.json",
+      "status": "success"
+    },
+    "search/0/1/subset/0": {
+      "code_ref": "artifacts/bf2d4efa9d2eb167a58dfd19b9c40b96afcc0ae30c804300f43111e01ac654b0.json",
+      "observation_ref": "artifacts/db996c39b70c741e8ad6f5a6463307f43bda1e26c9563c1f4246e80153bbfe76.json",
+      "phase": "subset",
+      "prediction_refs": [
+        "artifacts/90a44459a05fb4b31566515ae05f51079ba9757980c73fc459c3ff9fce81560b.json"
+      ],
+      "protocol_hash": "1fcf45773a615cd026bc8dca2c10c0be7a9195738081d59fa8d0f7ed2dd77495",
+      "protocol_ref": "artifacts/1fcf45773a615cd026bc8dca2c10c0be7a9195738081d59fa8d0f7ed2dd77495.json",
+      "reason": "Trusted pilot scorer accepted the complete grid",
+      "receipt_refs": [
+        "artifacts/e9ea9f8c1a240b6ab5d2112bd85dbac3f2b34a22cea51bcfdaba42cb97648746.json"
+      ],
+      "seeds": [
+        0
+      ],
+      "source_tree_ref": "artifacts/62abbd8a6f43018d81095aa0e20b022ee062f682d9499ba7919b58bfcf98df1f.json",
+      "status": "success"
+    },
+    "search/0/1/subset/1": {
+      "code_ref": "artifacts/113ebf454e06949d78895564e8ad7ccbeb8ea7c3c2c3413ecbc0b88dbaa94326.json",
+      "observation_ref": "artifacts/629736fddfd7b9e70b81b24f5b76623d1cc909c559bea60f2ff25b0bc13bec37.json",
+      "phase": "subset",
+      "prediction_refs": [
+        "artifacts/2638302ac5492f0fdd48dfeb98df630e9d04991a126f2daa2bb51faa999d5f94.json"
+      ],
+      "protocol_hash": "1fcf45773a615cd026bc8dca2c10c0be7a9195738081d59fa8d0f7ed2dd77495",
+      "protocol_ref": "artifacts/1fcf45773a615cd026bc8dca2c10c0be7a9195738081d59fa8d0f7ed2dd77495.json",
+      "reason": "Trusted pilot scorer accepted the complete grid",
+      "receipt_refs": [
+        "artifacts/5e55ea5cb2a33b3343e5fc8043532e9368c2fb25f49c390f14a90acf6b908162.json"
+      ],
+      "seeds": [
+        0
+      ],
+      "source_tree_ref": "artifacts/36d2b80efadfd2d6428fd980896926d87a0f2fb674bc9e7de3f3d3c5ed23b877.json",
+      "status": "success"
+    },
+    "search/1/0/subset/0": {
+      "code_ref": "artifacts/bca721d1bbe306d67418fcf198ad1ecc142277266dab13a9cb003ffa16247ebc.json",
+      "observation_ref": "artifacts/2bdb6f956d068811f29deecc8208dc8449e77e440336f04396a75fa3bad6c7f6.json",
+      "phase": "subset",
+      "prediction_refs": [
+        "artifacts/1291db2c65b43319c1c4416a0ddca05d770b1c2f5037cb801d97cddc5611288f.json"
+      ],
+      "protocol_hash": "1fcf45773a615cd026bc8dca2c10c0be7a9195738081d59fa8d0f7ed2dd77495",
+      "protocol_ref": "artifacts/1fcf45773a615cd026bc8dca2c10c0be7a9195738081d59fa8d0f7ed2dd77495.json",
+      "reason": "Trusted pilot scorer accepted the complete grid",
+      "receipt_refs": [
+        "artifacts/0a88e5ff0fb6e954ed1ecd086f4dedf9524cceee607cbc37fd4785c6ba9381ec.json"
+      ],
+      "seeds": [
+        0
+      ],
+      "source_tree_ref": "artifacts/fd628ff7915223bf0f7042eaea4ccc0bf2f013d1c9e265f6757b1cc15b55d4e5.json",
+      "status": "success"
+    },
+    "search/1/0/subset/1": {
+      "code_ref": "artifacts/714bf0cc0674dc4f55fbc34535f054daf182aaef4b3ce38325f9f056e8287638.json",
+      "observation_ref": "artifacts/af3b747ced107a2837354d4bd4f7cab0a80a8d15e16a42466fee7a43b1be9a0e.json",
+      "phase": "subset",
+      "prediction_refs": [
+        "artifacts/7b495db5d234eee3f335cf9fd91d377784177d8b82d4f57f016fc135683577fe.json"
+      ],
+      "protocol_hash": "1fcf45773a615cd026bc8dca2c10c0be7a9195738081d59fa8d0f7ed2dd77495",
+      "protocol_ref": "artifacts/1fcf45773a615cd026bc8dca2c10c0be7a9195738081d59fa8d0f7ed2dd77495.json",
+      "reason": "Trusted pilot scorer accepted the complete grid",
+      "receipt_refs": [
+        "artifacts/2e5671fb447f3d3d305306860510b4f0bd2bb130771bd57167f2689db07f34aa.json"
+      ],
+      "seeds": [
+        0
+      ],
+      "source_tree_ref": "artifacts/984481f33e432339148a8cb4e5ac6d80390b3a9392c7194213d94ab55891dc5e.json",
+      "status": "success"
+    },
+    "search/1/1/subset/0": {
+      "code_ref": "artifacts/b31a4d091dc7b158ac2d874925d7341ad1f2c23e14541f1950fa72f5a30ad063.json",
+      "observation_ref": "artifacts/8e41afcad6213d736b3f61735d3d2d8b297c5603f155e999316d0a4d1c171a39.json",
+      "phase": "subset",
+      "prediction_refs": [
+        "artifacts/e11ff102f54a9dee356c02901ad22ec7a98b2b4a9e0c7877313922a2b2d95487.json"
+      ],
+      "protocol_hash": "1fcf45773a615cd026bc8dca2c10c0be7a9195738081d59fa8d0f7ed2dd77495",
+      "protocol_ref": "artifacts/1fcf45773a615cd026bc8dca2c10c0be7a9195738081d59fa8d0f7ed2dd77495.json",
+      "reason": "Trusted pilot scorer accepted the complete grid",
+      "receipt_refs": [
+        "artifacts/de923d2222db71c7223bfc82b10fb0d73a720030d3b7f3ccaa470c2912da5824.json"
+      ],
+      "seeds": [
+        0
+      ],
+      "source_tree_ref": "artifacts/f4272f35e0e45c58c7d85c3052c3f470b2b2128c4df8420e74540c8e5b2eab72.json",
+      "status": "success"
+    },
+    "search/1/1/subset/1": {
+      "code_ref": "artifacts/b44d5d1e00fefc0d404445e098b6e5701d0942ed8a57cff91d98aca78f4ee261.json",
+      "observation_ref": "artifacts/2b5808ed7e84dcde570abefe29e3e2033edd9156d4664dd384a0497f521569d0.json",
+      "phase": "subset",
+      "prediction_refs": [
+        "artifacts/dd1a58eb6a38c5d8482098ff8e7636adb79efc5c16452b1a3810d5fffc103b84.json"
+      ],
+      "protocol_hash": "1fcf45773a615cd026bc8dca2c10c0be7a9195738081d59fa8d0f7ed2dd77495",
+      "protocol_ref": "artifacts/1fcf45773a615cd026bc8dca2c10c0be7a9195738081d59fa8d0f7ed2dd77495.json",
+      "reason": "Trusted pilot scorer accepted the complete grid",
+      "receipt_refs": [
+        "artifacts/50b695dd5a45ce8a12be4ddb787c7de0c044a74571d1556c4b8129b81d429eb9.json"
+      ],
+      "seeds": [
+        0
+      ],
+      "source_tree_ref": "artifacts/c0ad3ef4212f54ac8f89c7d3f4e63a98c16ad77d83ef89b7c3b126a5e0816e27.json",
+      "status": "success"
+    }
+  },
+  "research_history": {
+    "entries": {
+      "history:2d31bb3f90bf29dd4fba8117": {
+        "decision": {
+          "decision": "Engineer",
+          "reason": "Improvement rule or guardrail not met"
+        },
+        "evidence_id": "history:2d31bb3f90bf29dd4fba8117",
+        "execution_status": "success",
+        "hypothesis": "Test a nonlinear kernel under the same data protocol.",
+        "kind": "research_history",
+        "measurement_ids": [
+          "measurement:2f4e990e5650ae613e83747e",
+          "measurement:3d0eea8dc1805c6dd4545f9c"
+        ],
+        "observation_id": "search/1/0/subset/0",
+        "observation_ref": "artifacts/2bdb6f956d068811f29deecc8208dc8449e77e440336f04396a75fa3bad6c7f6.json",
+        "parents": [],
+        "phase": "subset",
+        "protocol_hash": "1fcf45773a615cd026bc8dca2c10c0be7a9195738081d59fa8d0f7ed2dd77495",
+        "protocol_ref": "artifacts/1fcf45773a615cd026bc8dca2c10c0be7a9195738081d59fa8d0f7ed2dd77495.json",
+        "source_ref": "artifacts/fd628ff7915223bf0f7042eaea4ccc0bf2f013d1c9e265f6757b1cc15b55d4e5.json",
+        "support_scope": "Committed execution status and recorded scientific decision; decision correctness and causal support remain unverified",
+        "title": "seed-svc",
+        "trial_id": "search/1/0/subset/0",
+        "trial_ref": "artifacts/0cad92121146fadc2fbd4080a6065e6b58008088a64a4022987cf93bb70f5327.json"
+      },
+      "history:49a21220cfe4259bd7584e59": {
+        "decision": {
+          "decision": "Engineer",
+          "reason": "Improvement rule or guardrail not met"
+        },
+        "evidence_id": "history:49a21220cfe4259bd7584e59",
+        "execution_status": "success",
+        "hypothesis": "Fixed standardized logistic regression reference. Refined using recorded trial feedback.",
+        "kind": "research_history",
+        "measurement_ids": [
+          "measurement:394d07f0a232e38350c02063",
+          "measurement:a3af866468f7dcd82f113403"
+        ],
+        "observation_id": "search/1/1/subset/0",
+        "observation_ref": "artifacts/8e41afcad6213d736b3f61735d3d2d8b297c5603f155e999316d0a4d1c171a39.json",
+        "parents": [
+          "search/0/0/subset/0",
+          "search/0/0/subset/1",
+          "search/0/1/subset/0",
+          "search/0/1/subset/1",
+          "baseline"
+        ],
+        "phase": "subset",
+        "protocol_hash": "1fcf45773a615cd026bc8dca2c10c0be7a9195738081d59fa8d0f7ed2dd77495",
+        "protocol_ref": "artifacts/1fcf45773a615cd026bc8dca2c10c0be7a9195738081d59fa8d0f7ed2dd77495.json",
+        "source_ref": "artifacts/f4272f35e0e45c58c7d85c3052c3f470b2b2128c4df8420e74540c8e5b2eab72.json",
+        "support_scope": "Committed execution status and recorded scientific decision; decision correctness and causal support remain unverified",
+        "title": "evolve-5652a077da418ddb",
+        "trial_id": "search/1/1/subset/0",
+        "trial_ref": "artifacts/459cee18a4d6b5212bcde2e6586f663ee7cc06536391033ea2d8433d50c4f915.json"
+      },
+      "history:4d2e01e54f541d63d45cc351": {
+        "decision": {
+          "decision": "Bad",
+          "reason": "Improvement rule or guardrail not met"
+        },
+        "evidence_id": "history:4d2e01e54f541d63d45cc351",
+        "execution_status": "success",
+        "hypothesis": "Test whether local neighborhoods improve classification.",
+        "kind": "research_history",
+        "measurement_ids": [
+          "measurement:8e08f07044fbb350e60a9c23",
+          "measurement:7fbfacb5c5f118b0f7105274"
+        ],
+        "observation_id": "search/0/1/subset/1",
+        "observation_ref": "artifacts/629736fddfd7b9e70b81b24f5b76623d1cc909c559bea60f2ff25b0bc13bec37.json",
+        "parents": [
+          "search/0/1/subset/0"
+        ],
+        "phase": "subset",
+        "protocol_hash": "1fcf45773a615cd026bc8dca2c10c0be7a9195738081d59fa8d0f7ed2dd77495",
+        "protocol_ref": "artifacts/1fcf45773a615cd026bc8dca2c10c0be7a9195738081d59fa8d0f7ed2dd77495.json",
+        "source_ref": "artifacts/36d2b80efadfd2d6428fd980896926d87a0f2fb674bc9e7de3f3d3c5ed23b877.json",
+        "support_scope": "Committed execution status and recorded scientific decision; decision correctness and causal support remain unverified",
+        "title": "seed-knn",
+        "trial_id": "search/0/1/subset/1",
+        "trial_ref": "artifacts/cb1b111c0a023d8c11ea41c7ddbc3cd750f46a5ce0359cd1cfcd445874bab1aa.json"
+      },
+      "history:9669035934d865122cb458cd": {
+        "decision": {
+          "decision": "Bad",
+          "reason": "Improvement rule or guardrail not met"
+        },
+        "evidence_id": "history:9669035934d865122cb458cd",
+        "execution_status": "success",
+        "hypothesis": "Test a nonlinear kernel under the same data protocol.",
+        "kind": "research_history",
+        "measurement_ids": [
+          "measurement:d3f68d5992143dcf59c098b9",
+          "measurement:ff83a532e5c33b38ce6d1f1e"
+        ],
+        "observation_id": "search/1/0/subset/1",
+        "observation_ref": "artifacts/af3b747ced107a2837354d4bd4f7cab0a80a8d15e16a42466fee7a43b1be9a0e.json",
+        "parents": [
+          "search/1/0/subset/0"
+        ],
+        "phase": "subset",
+        "protocol_hash": "1fcf45773a615cd026bc8dca2c10c0be7a9195738081d59fa8d0f7ed2dd77495",
+        "protocol_ref": "artifacts/1fcf45773a615cd026bc8dca2c10c0be7a9195738081d59fa8d0f7ed2dd77495.json",
+        "source_ref": "artifacts/984481f33e432339148a8cb4e5ac6d80390b3a9392c7194213d94ab55891dc5e.json",
+        "support_scope": "Committed execution status and recorded scientific decision; decision correctness and causal support remain unverified",
+        "title": "seed-svc",
+        "trial_id": "search/1/0/subset/1",
+        "trial_ref": "artifacts/905eb74b29eb66f0e4199ce3de0df599b06a42a9b38c18c5ad174dfb7c6ab210.json"
+      },
+      "history:b3a503e0b1cbc9bf6e777d31": {
+        "decision": {
+          "decision": "Engineer",
+          "reason": "Improvement rule or guardrail not met"
+        },
+        "evidence_id": "history:b3a503e0b1cbc9bf6e777d31",
+        "execution_status": "success",
+        "hypothesis": "Test bounded-depth feature interactions.",
+        "kind": "research_history",
+        "measurement_ids": [
+          "measurement:77fdabde53a23c460c6e35ec",
+          "measurement:56acfb1cc51b7b7c8ec092fc"
+        ],
+        "observation_id": "search/0/0/subset/0",
+        "observation_ref": "artifacts/ca9e47bce413a1e5421b2406033cf98708dbf9f2d2dc471fc4b0f821c2773725.json",
+        "parents": [],
+        "phase": "subset",
+        "protocol_hash": "1fcf45773a615cd026bc8dca2c10c0be7a9195738081d59fa8d0f7ed2dd77495",
+        "protocol_ref": "artifacts/1fcf45773a615cd026bc8dca2c10c0be7a9195738081d59fa8d0f7ed2dd77495.json",
+        "source_ref": "artifacts/f412dd61dfb6d99872dff0f013c010ad4a278a7dd0de0f6e15f5b1296dad7655.json",
+        "support_scope": "Committed execution status and recorded scientific decision; decision correctness and causal support remain unverified",
+        "title": "seed-forest",
+        "trial_id": "search/0/0/subset/0",
+        "trial_ref": "artifacts/18fc503136c7d738ef7626c660aa415f6f2af199149f867112e1d9c78e7d94ca.json"
+      },
+      "history:c6574bd6656ea68834c7e338": {
+        "decision": {
+          "decision": "Bad",
+          "reason": "Improvement rule or guardrail not met"
+        },
+        "evidence_id": "history:c6574bd6656ea68834c7e338",
+        "execution_status": "success",
+        "hypothesis": "Fixed standardized logistic regression reference. Refined using recorded trial feedback.",
+        "kind": "research_history",
+        "measurement_ids": [
+          "measurement:52711ebd23dca4f3ed66b1c0",
+          "measurement:3256bdc02df66af9cc37b99e"
+        ],
+        "observation_id": "search/1/1/subset/1",
+        "observation_ref": "artifacts/2b5808ed7e84dcde570abefe29e3e2033edd9156d4664dd384a0497f521569d0.json",
+        "parents": [
+          "search/1/1/subset/0"
+        ],
+        "phase": "subset",
+        "protocol_hash": "1fcf45773a615cd026bc8dca2c10c0be7a9195738081d59fa8d0f7ed2dd77495",
+        "protocol_ref": "artifacts/1fcf45773a615cd026bc8dca2c10c0be7a9195738081d59fa8d0f7ed2dd77495.json",
+        "source_ref": "artifacts/c0ad3ef4212f54ac8f89c7d3f4e63a98c16ad77d83ef89b7c3b126a5e0816e27.json",
+        "support_scope": "Committed execution status and recorded scientific decision; decision correctness and causal support remain unverified",
+        "title": "evolve-5652a077da418ddb",
+        "trial_id": "search/1/1/subset/1",
+        "trial_ref": "artifacts/2f4a8ad68d51349cfd3c63ff8fe482b1ff3377a1a186e5a0d579820153201be9.json"
+      },
+      "history:e9bd1e148ab588a06ead0908": {
+        "decision": {
+          "decision": "Bad",
+          "reason": "Improvement rule or guardrail not met"
+        },
+        "evidence_id": "history:e9bd1e148ab588a06ead0908",
+        "execution_status": "success",
+        "hypothesis": "Test bounded-depth feature interactions.",
+        "kind": "research_history",
+        "measurement_ids": [
+          "measurement:73f61807e84ceccc42d6baab",
+          "measurement:dd2c080a81b068527bcb0f90"
+        ],
+        "observation_id": "search/0/0/subset/1",
+        "observation_ref": "artifacts/f649bfc0901bb67a12c47f35ef82999fcd59ee49622d2cb27b3aa2c3cc0b5c21.json",
+        "parents": [
+          "search/0/0/subset/0"
+        ],
+        "phase": "subset",
+        "protocol_hash": "1fcf45773a615cd026bc8dca2c10c0be7a9195738081d59fa8d0f7ed2dd77495",
+        "protocol_ref": "artifacts/1fcf45773a615cd026bc8dca2c10c0be7a9195738081d59fa8d0f7ed2dd77495.json",
+        "source_ref": "artifacts/688752e1267c2d2ec6c4b917b42ce3f2f9ea8500dfc8042791f421bb68d58de6.json",
+        "support_scope": "Committed execution status and recorded scientific decision; decision correctness and causal support remain unverified",
+        "title": "seed-forest",
+        "trial_id": "search/0/0/subset/1",
+        "trial_ref": "artifacts/007036b4f6cd029d8b21f9a253979e899f883ab644012416e9c625d1aedd8a63.json"
+      },
+      "history:f5101b595251b20581853259": {
+        "decision": {
+          "decision": "Engineer",
+          "reason": "Improvement rule or guardrail not met"
+        },
+        "evidence_id": "history:f5101b595251b20581853259",
+        "execution_status": "success",
+        "hypothesis": "Test whether local neighborhoods improve classification.",
+        "kind": "research_history",
+        "measurement_ids": [
+          "measurement:357227575bc1b55002782a4f",
+          "measurement:f3d9d9247c4bf78369699c71"
+        ],
+        "observation_id": "search/0/1/subset/0",
+        "observation_ref": "artifacts/db996c39b70c741e8ad6f5a6463307f43bda1e26c9563c1f4246e80153bbfe76.json",
+        "parents": [],
+        "phase": "subset",
+        "protocol_hash": "1fcf45773a615cd026bc8dca2c10c0be7a9195738081d59fa8d0f7ed2dd77495",
+        "protocol_ref": "artifacts/1fcf45773a615cd026bc8dca2c10c0be7a9195738081d59fa8d0f7ed2dd77495.json",
+        "source_ref": "artifacts/62abbd8a6f43018d81095aa0e20b022ee062f682d9499ba7919b58bfcf98df1f.json",
+        "support_scope": "Committed execution status and recorded scientific decision; decision correctness and causal support remain unverified",
+        "title": "seed-knn",
+        "trial_id": "search/0/1/subset/0",
+        "trial_ref": "artifacts/c64784b3c8151d12d251a04d5df307084a50450dc5c183ab70601c0efb835359.json"
+      }
+    },
+    "schema_version": "research-history-context-v1",
+    "trial_refs": [
+      "artifacts/18fc503136c7d738ef7626c660aa415f6f2af199149f867112e1d9c78e7d94ca.json",
+      "artifacts/007036b4f6cd029d8b21f9a253979e899f883ab644012416e9c625d1aedd8a63.json",
+      "artifacts/c64784b3c8151d12d251a04d5df307084a50450dc5c183ab70601c0efb835359.json",
+      "artifacts/cb1b111c0a023d8c11ea41c7ddbc3cd750f46a5ce0359cd1cfcd445874bab1aa.json",
+      "artifacts/0cad92121146fadc2fbd4080a6065e6b58008088a64a4022987cf93bb70f5327.json",
+      "artifacts/905eb74b29eb66f0e4199ce3de0df599b06a42a9b38c18c5ad174dfb7c6ab210.json",
+      "artifacts/459cee18a4d6b5212bcde2e6586f663ee7cc06536391033ea2d8433d50c4f915.json",
+      "artifacts/2f4a8ad68d51349cfd3c63ff8fe482b1ff3377a1a186e5a0d579820153201be9.json"
+    ]
+  },
+  "schema_version": "evidence-ledger-v2",
+  "source_verification": {
+    "scientisttwo": {
+      "content_identity": "unverified",
+      "metadata_existence": "unverified",
+      "scope": "Metadata retrieval identity and available passage bytes only; no citation entailment",
+      "support": "unverified"
+    },
+    "sklearn-toy": {
+      "content_identity": "unverified",
+      "metadata_existence": "unverified",
+      "scope": "Metadata retrieval identity and available passage bytes only; no citation entailment",
+      "support": "unverified"
+    },
+    "task": {
+      "content_identity": "pass",
+      "metadata_existence": "unverified",
+      "scope": "Metadata retrieval identity and available passage bytes only; no citation entailment",
+      "support": "unverified"
+    }
+  },
+  "sources": {
+    "scientisttwo": {
+      "aliases": [
+        "scientisttwo"
+      ],
+      "arxiv_id": null,
+      "authors": [],
+      "content_ref": null,
+      "content_sha256": null,
+      "content_status": "metadata_only",
+      "doi": null,
+      "id": "scientisttwo",
+      "limitations": [
+        "Supplied source metadata has not been independently resolved."
+      ],
+      "metadata_status": "supplied",
+      "passages": [],
+      "provenance": [
+        {
+          "input_sha256": "b65fb0d9104ff76ef2aaa8d99d432d0c2966a7f6650d88b094c14149c2075126",
+          "provider": "local",
+          "status": "supplied"
+        }
+      ],
+      "provider": "local",
+      "retrieved_at": "2026-10-21T08:21:40.432804+00:00",
+      "schema_version": "research-source-v1",
+      "scholarly": false,
+      "title": "ScientistTwo",
+      "url": "https://arxiv.org/abs/2609.19644",
+      "version": null,
+      "versions": [],
+      "year": null
+    },
+    "sklearn-toy": {
+      "aliases": [
+        "sklearn-toy"
+      ],
+      "arxiv_id": null,
+      "authors": [],
+      "content_ref": null,
+      "content_sha256": null,
+      "content_status": "metadata_only",
+      "doi": null,
+      "id": "sklearn-toy",
+      "limitations": [
+        "Supplied source metadata has not been independently resolved."
+      ],
+      "metadata_status": "supplied",
+      "passages": [],
+      "provenance": [
+        {
+          "input_sha256": "d07998a6fb3cfa65347f350cb2e8dcfa4cb25b3cf98c61f3693b0e8bbbec8a20",
+          "provider": "local",
+          "status": "supplied"
+        }
+      ],
+      "provider": "local",
+      "retrieved_at": "2026-10-21T08:21:40.432823+00:00",
+      "schema_version": "research-source-v1",
+      "scholarly": false,
+      "title": "scikit-learn toy datasets",
+      "url": "https://scikit-learn.org/stable/datasets/toy_dataset.html",
+      "version": null,
+      "versions": [],
+      "year": null
+    },
+    "task": {
+      "content_status": "supplied_excerpt",
+      "id": "task",
+      "metadata_status": "supplied",
+      "passages": [
+        {
+          "id": "task:supplied",
+          "scope": "supplied_excerpt",
+          "sha256": "443ac689a791622e8a8fa2067634e70bd4cb119d418f7cbcf0f84f0e55e6c67b",
+          "text": "{'contract': 'Edit only candidate.py exposing build(seed), which returns an estimator with fit/predict. The trusted worker imports candidate code only inside an offline restricted container. Training rows and labels are available; evaluation labels are withheld. The controller computes scores from predictions.', 'task': {'schema_version': 2, 'name': 'pilot', 'question': 'Compare small classification pipelines under a fixed evaluation protocol.', 'adapter': 'classification', 'settings': {}, 'datasets': ['iris', 'wine', 'digits'], 'subset_datasets': ['iris', 'wine'], 'seeds': [0, 1, 2], 'data_seed': 1729, 'split_seed': 0, 'subset_fraction': 0.5, 'improvement_epsilon': 0.0001, 'primary_metric': 'macro_f1', 'metric_directions': {'macro_f1': 'maximize', 'accuracy': 'maximize'}, 'guardrails': {'accuracy': 0.01}, 'quality_tolerance': 1e-08}, 'editable_files': ['candidate.py'], 'scaling_paths': [], 'baseline_modes': ['prepared_reference'], 'baseline_provenance': 'Explicit scripted reference supplied by the installed TaskAdapter', 'baseline_source': '# Scripted ScientistTwo fixture; not an autonomously discovered method.\\nfrom sklearn.preprocessing import StandardScaler\\nfrom sklearn.pipeline import make_pipeline\\nfrom sklearn.linear_model import LogisticRegression\\nfrom sklearn.neighbors import KNeighborsClassifier\\nfrom sklearn.svm import SVC\\nfrom sklearn.ensemble import RandomForestClassifier\\n\\ndef build(seed):\\n    estimator = LogisticRegression(C=1, max_iter=2000, random_state=seed)\\n    return make_pipeline(StandardScaler(), estimator) if True else estimator\\n', 'execution': {'command': ['python', '/worker.py'], 'kind': 'pilot_batch', 'one_container_per_evaluation': True, 'training_seed_policy': 'A fresh build(seed) and fit per dataset/seed cell'}, 'effective_settings': {'source': 'Complete candidate.py; constructor parameters are explicit', 'preprocessing': 'Any supplied scaler fits within the training pipeline', 'threads': 1, 'cpus': 1, 'memory_mb': 1024, 'equal_permitted_budget': True}, 'comparison': {'primary': 'macro_f1', 'aggregation': 'mean over matched datasets and seeds', 'guardrails': {'accuracy': 0.01}, 'guardrail_scope': 'each dataset mean', 'epsilon': 0.0001}, 'measurement_scope': 'Real container measurements when executed; scripted proposals are synthetic agents'}"
+        }
+      ],
+      "text": "{'contract': 'Edit only candidate.py exposing build(seed), which returns an estimator with fit/predict. The trusted worker imports candidate code only inside an offline restricted container. Training rows and labels are available; evaluation labels are withheld. The controller computes scores from predictions.', 'task': {'schema_version': 2, 'name': 'pilot', 'question': 'Compare small classification pipelines under a fixed evaluation protocol.', 'adapter': 'classification', 'settings': {}, 'datasets': ['iris', 'wine', 'digits'], 'subset_datasets': ['iris', 'wine'], 'seeds': [0, 1, 2], 'data_seed': 1729, 'split_seed': 0, 'subset_fraction': 0.5, 'improvement_epsilon': 0.0001, 'primary_metric': 'macro_f1', 'metric_directions': {'macro_f1': 'maximize', 'accuracy': 'maximize'}, 'guardrails': {'accuracy': 0.01}, 'quality_tolerance': 1e-08}, 'editable_files': ['candidate.py'], 'scaling_paths': [], 'baseline_modes': ['prepared_reference'], 'baseline_provenance': 'Explicit scripted reference supplied by the installed TaskAdapter', 'baseline_source': '# Scripted ScientistTwo fixture; not an autonomously discovered method.\\nfrom sklearn.preprocessing import StandardScaler\\nfrom sklearn.pipeline import make_pipeline\\nfrom sklearn.linear_model import LogisticRegression\\nfrom sklearn.neighbors import KNeighborsClassifier\\nfrom sklearn.svm import SVC\\nfrom sklearn.ensemble import RandomForestClassifier\\n\\ndef build(seed):\\n    estimator = LogisticRegression(C=1, max_iter=2000, random_state=seed)\\n    return make_pipeline(StandardScaler(), estimator) if True else estimator\\n', 'execution': {'command': ['python', '/worker.py'], 'kind': 'pilot_batch', 'one_container_per_evaluation': True, 'training_seed_policy': 'A fresh build(seed) and fit per dataset/seed cell'}, 'effective_settings': {'source': 'Complete candidate.py; constructor parameters are explicit', 'preprocessing': 'Any supplied scaler fits within the training pipeline', 'threads': 1, 'cpus': 1, 'memory_mb': 1024, 'equal_permitted_budget': True}, 'comparison': {'primary': 'macro_f1', 'aggregation': 'mean over matched datasets and seeds', 'guardrails': {'accuracy': 0.01}, 'guardrail_scope': 'each dataset mean', 'epsilon': 0.0001}, 'measurement_scope': 'Real container measurements when executed; scripted proposals are synthetic agents'}",
+      "title": "pilot"
+    }
+  },
+  "tables": {
+    "table:066af8bdf289b29c5879": {
+      "caption": "Recorded aggregate and matched per-seed measurements; no significance claim.",
+      "evidence_ids": [
+        "measurement:441702b3757dba8b4d2f0a7d",
+        "measurement:77fdabde53a23c460c6e35ec",
+        "measurement:73f61807e84ceccc42d6baab",
+        "measurement:357227575bc1b55002782a4f",
+        "measurement:8e08f07044fbb350e60a9c23",
+        "measurement:2f4e990e5650ae613e83747e",
+        "measurement:d3f68d5992143dcf59c098b9",
+        "measurement:394d07f0a232e38350c02063",
+        "measurement:52711ebd23dca4f3ed66b1c0"
+      ],
+      "kind": "measurements",
+      "metric": "accuracy",
+      "protocol_hash": "1fcf45773a615cd026bc8dca2c10c0be7a9195738081d59fa8d0f7ed2dd77495"
+    },
+    "table:1300df50fea04f67f98d": {
+      "caption": "Recorded aggregate and matched per-seed measurements; no significance claim.",
+      "evidence_ids": [
+        "measurement:13c84b7e118e0a5e8484eeeb"
+      ],
+      "kind": "measurements",
+      "metric": "macro_f1",
+      "protocol_hash": "22c3066b7932a18133b9a31ec2a0a435f8222be320e58d89d3e75f9af86f99ba"
+    },
+    "table:742824cb5f3045df1f83": {
+      "caption": "Recorded aggregate and matched per-seed measurements; no significance claim.",
+      "evidence_ids": [
+        "measurement:728ef6660ef91154390a4ebb"
+      ],
+      "kind": "measurements",
+      "metric": "accuracy",
+      "protocol_hash": "259f48ff7f1913cdf515eb777e8d8d667f9b35e42cd4275e5a8f4dabae26292d"
+    },
+    "table:83e6b3e0268a5fb0cdb1": {
+      "caption": "Recorded aggregate and matched per-seed measurements; no significance claim.",
+      "evidence_ids": [
+        "measurement:5f08da831418203a841b1968"
+      ],
+      "kind": "measurements",
+      "metric": "macro_f1",
+      "protocol_hash": "259f48ff7f1913cdf515eb777e8d8d667f9b35e42cd4275e5a8f4dabae26292d"
+    },
+    "table:b92de479846c925748f1": {
+      "caption": "Recorded aggregate and matched per-seed measurements; no significance claim.",
+      "evidence_ids": [
+        "measurement:d970554291a9459890296409",
+        "measurement:56acfb1cc51b7b7c8ec092fc",
+        "measurement:dd2c080a81b068527bcb0f90",
+        "measurement:f3d9d9247c4bf78369699c71",
+        "measurement:7fbfacb5c5f118b0f7105274",
+        "measurement:3d0eea8dc1805c6dd4545f9c",
+        "measurement:ff83a532e5c33b38ce6d1f1e",
+        "measurement:a3af866468f7dcd82f113403",
+        "measurement:3256bdc02df66af9cc37b99e"
+      ],
+      "kind": "measurements",
+      "metric": "macro_f1",
+      "protocol_hash": "1fcf45773a615cd026bc8dca2c10c0be7a9195738081d59fa8d0f7ed2dd77495"
+    },
+    "table:d49a077afc3b4a242917": {
+      "caption": "Recorded aggregate and matched per-seed measurements; no significance claim.",
+      "evidence_ids": [
+        "measurement:5fb633bfc107cbfbd70d0518"
+      ],
+      "kind": "measurements",
+      "metric": "accuracy",
+      "protocol_hash": "22c3066b7932a18133b9a31ec2a0a435f8222be320e58d89d3e75f9af86f99ba"
+    }
+  }
+}

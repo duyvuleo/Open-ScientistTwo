@@ -1,0 +1,55 @@
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[project]
+name = "scientisttwo"
+version = "0.4.0"
+description = "Open-ScientistTwo: an independent experimental research workflow implementation"
+readme = "README.md"
+license = "MIT AND Apache-2.0 AND LPPL-1.3c"
+license-files = ["LICENSE", "THIRD_PARTY_NOTICES.md", "licenses/*.txt", "src/scientisttwo/research/templates/iclr2025/LICENSE"]
+requires-python = ">=3.12,<3.13"
+dependencies = ["pydantic>=2.10,<3", "typer>=0.15,<1", "numpy>=2,<3", "scikit-learn>=1.6,<2", "pandas>=2.2,<3", "PyYAML>=6,<7"]
+
+[project.urls]
+Repository = "https://github.com/duyvuleo/Open-ScientistTwo"
+Issues = "https://github.com/duyvuleo/Open-ScientistTwo/issues"
+
+[project.scripts]
+scientisttwo = "scientisttwo.cli:main"
+
+[project.optional-dependencies]
+preparation = ["tokenizers==0.20.3", "Pillow>=11,<13"]
+
+[project.entry-points."scientisttwo.native_development"]
+testbed = "scientisttwo.testbed.adapter:PreparedDevelopment"
+cifar_recipe = "scientisttwo.studies.cifar_adapter:CifarRecipeDevelopment"
+
+[dependency-groups]
+dev = ["pytest>=8,<10", "pytest-cov>=6,<8", "ruff>=0.11,<1"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = ["container: requires a prebuilt local Linux container image", "native_container: requires pinned upstream checkouts, LFS metadata, and the native benchmark image"]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+extend-exclude = ["src/scientisttwo/_vendor"]
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/scientisttwo"]
+
+[tool.hatch.build.targets.sdist]
+include = [
+  "src/scientisttwo/**", "tests/**", "examples/**", "scripts/**",
+  "runtime-profiles/**", "docker/**", "manuscript-runtime/**", "native-runtime/**",
+  "docs/**", "README.md", "LICENSE", "THIRD_PARTY_NOTICES.md", "CITATION.cff",
+  "licenses/**", "CONTRIBUTING.md",
+  "pyproject.toml", "uv.lock", ".python-version", "Dockerfile",
+  "requirements-worker.txt", ".dockerignore",
+]

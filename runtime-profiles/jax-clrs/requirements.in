@@ -1,0 +1,15 @@
+jax[cuda12_pip]==0.4.26
+jaxlib==0.4.26
+dm-haiku==0.0.12
+optax==0.2.2
+chex==0.1.86
+dm-clrs==1.0.0
+tensorflow==2.15.1
+tfds-nightly==4.5.2.dev202204190046
+tensorflow-metadata==1.15.0
+numpy==1.26.4
+protobuf==3.20.3
+absl-py==2.1.0
+attrs==24.2.0
+toolz==1.0.0
+setuptools==69.5.1

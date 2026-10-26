@@ -1,0 +1,64 @@
+{
+  "files": {
+    "citation_map.json": {
+      "bytes": 696,
+      "sha256": "7c7efc4b911b2c9712c1806f882fa1416bfc20bcc8a59be3dbf82541e99037c9"
+    },
+    "evidence_ledger.json": {
+      "bytes": 61856,
+      "sha256": "5187b7389d05caa1ef4f80f5b3893c36154d19ea16e316885df695baa9e2cc56"
+    },
+    "experimental_log.md": {
+      "bytes": 24910,
+      "sha256": "7f240e9943cfadbb31a40ff9864b73697351d4257141efaba364b529be094282"
+    },
+    "figures/info.json": {
+      "bytes": 3,
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    "idea_sparse.md": {
+      "bytes": 856,
+      "sha256": "ad9a029e527bd542cd887de6dc4fed140cbfc1ea7e95b37ed519534733196b53"
+    },
+    "literature/metadata.json": {
+      "bytes": 1450,
+      "sha256": "116fb662c5029971d7317c3c019ada2fd0b13329ab63bb3244ba4d0580cca6ec"
+    },
+    "references.bib": {
+      "bytes": 485,
+      "sha256": "d8d73db5c341580200b3332daa608d7f8a5b00417ba54a595efd5613f035d4b7"
+    }
+  },
+  "includes_final": false,
+  "limits": {
+    "max_bytes": 2000000,
+    "max_files": 12
+  },
+  "provenance": {
+    "observation_refs": {
+      "baseline/full": "artifacts/fa3edc09841f5d7e414d4d612f82af846b9dbc0f833923395a9177dc27d9c882.json",
+      "baseline/subset": "artifacts/e5fa89392504110efb57e1b3ce77e842171becde2fac5800a40e280d48f424b3.json",
+      "negative/rebuttal/0/matched/2": "artifacts/ac2537e8eec9d420f9e832640cb3a7a76237e747eee0783cca02f895aaa2d3f0.json",
+      "search/0/0/subset/0": "artifacts/ca9e47bce413a1e5421b2406033cf98708dbf9f2d2dc471fc4b0f821c2773725.json",
+      "search/0/0/subset/1": "artifacts/f649bfc0901bb67a12c47f35ef82999fcd59ee49622d2cb27b3aa2c3cc0b5c21.json",
+      "search/0/1/subset/0": "artifacts/db996c39b70c741e8ad6f5a6463307f43bda1e26c9563c1f4246e80153bbfe76.json",
+      "search/0/1/subset/1": "artifacts/629736fddfd7b9e70b81b24f5b76623d1cc909c559bea60f2ff25b0bc13bec37.json",
+      "search/1/0/subset/0": "artifacts/2bdb6f956d068811f29deecc8208dc8449e77e440336f04396a75fa3bad6c7f6.json",
+      "search/1/0/subset/1": "artifacts/af3b747ced107a2837354d4bd4f7cab0a80a8d15e16a42466fee7a43b1be9a0e.json",
+      "search/1/1/subset/0": "artifacts/8e41afcad6213d736b3f61735d3d2d8b297c5603f155e999316d0a4d1c171a39.json",
+      "search/1/1/subset/1": "artifacts/2b5808ed7e84dcde570abefe29e3e2033edd9156d4664dd384a0497f521569d0.json"
+    },
+    "packaging": "New export-time ledger from committed development evidence; historical records are unchanged.",
+    "protocol_hashes": [
+      "1fcf45773a615cd026bc8dca2c10c0be7a9195738081d59fa8d0f7ed2dd77495",
+      "22c3066b7932a18133b9a31ec2a0a435f8222be320e58d89d3e75f9af86f99ba",
+      "259f48ff7f1913cdf515eb777e8d8d667f9b35e42cd4275e5a8f4dabae26292d"
+    ],
+    "source_ledger_sha256": "73f81bf490d6232f6283a982d524abeba6f0b40401db27f0f94a4c555eb7f6d1",
+    "source_run_id": "pilot-0a235557836a",
+    "synthetic_research_agents": true
+  },
+  "schema_version": "paperorchestra-evidence-bundle-v1",
+  "upstream_revision": "ca1b3fa01c2970fc7cda32d16245db38d57b3f56",
+  "verification_scope": "Committed artifact identity and recorded values; metric recomputation and prose entailment are separate."
+}

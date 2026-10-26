@@ -1,0 +1,36 @@
+{
+  "schema_version": "open-scientisttwo-paperorchestra-vendor-v1",
+  "source": "https://github.com/google-research/paper-orchestra",
+  "revision": "ca1b3fa01c2970fc7cda32d16245db38d57b3f56",
+  "scope": "Unmodified executed Python closure and templates used by the adapted ScientistTwo integration; no upstream SDK clients, retrieval clients, datasets, or Git history",
+  "files": {
+    "LICENSE": "58d1e17ffe5109a7ae296caafcadfdbe6a7d176f0bc4ab01e12a689b0499d8bd",
+    "utils/prompt_utils.py": "72b19f8adda3b870bc797c30e1260331ce5e429c346e39b05a0ad932b858df9e",
+    "autoraters/agent_review.py": "7d1cf9326d68a5fe5a2744d1c284f3333e9781db99600ed3606cf01c7e00062b",
+    "methods/agents/content_refinement_agent.py": "c6dc3e5d36d85adaae931b8036327756c630cccb8f1dddc9d9282d1eb4c1a038",
+    "methods/agents/outline_agent.py": "bc1724362938e5ed2ff96f509c0d0a6169c55461b0ab860bb9cd52a4a0d7e169",
+    "methods/agents/section_writing_agent.py": "747e150ee450a7ad6a9d50b6f4a31e20e643609d619e1183de7d28e83a6f015e",
+    "methods/prompts/content_refinement_agent.py": "539c0584d8e85505a17495f9a646c1551201e5a1c95264464516b1fcc5ff6a59",
+    "methods/prompts/outline_agent.py": "fb9d318dc432208cff41ee1fc340b920ca392e9db4da5dbc1d78a7493ebb2c5b",
+    "methods/prompts/section_writing_agent.py": "e222611a6f57708fe8a1b8fbee73ddcc5318eac774cd46f03478118345d3a383",
+    "templates/iclr2025/fancyhdr.sty": "b56ec4434b9f4607529a4b23dc68ad8d4b94f1f631c8cddaf7da78140d53a5ea",
+    "templates/iclr2025/guidelines.md": "853f9f8b9a8b57d5e0eca44c1abc77dba352440d4d4aee240431421eb3ae4eeb",
+    "templates/iclr2025/iclr2025_conference.bst": "2d67552db7ed38ccfccb5957b52f95656e25c249724761d3cf5f7922ad1844c5",
+    "templates/iclr2025/iclr2025_conference.sty": "9e280a9ff99be84ad190f5cafe047a1a32c2eeb9ca14232ddceae42d8489c697",
+    "templates/iclr2025/math_commands.tex": "90473c4d0542070db244cea73ef962d6cddc5b2a746757e6a40ddf5fdfb90ba9",
+    "templates/iclr2025/natbib.sty": "88bc70c0e48461934cab5b2accef06b74a8b3ac45ad03ccd3f2a6b7e0d6d530d",
+    "templates/iclr2025/references.bib": "cdd86e7d4c31854dcf2145871657c944588a6d44c3b72e160ff4baa8df1a52fb",
+    "templates/iclr2025/template.tex": "bb1ea888e8791267ecca2b05867d302d121924b3f088cbd23f4dd98663df5692"
+  },
+  "modifications_to_listed_files": false,
+  "licensing": "LICENSE and original file-level license/copyright notices retained; see repository THIRD_PARTY_NOTICES.md and any accompanying licensing-source files",
+  "license_sources": {
+    "license_sources/natbib.dtx": {
+      "sha256": "d7e80d7d4fd0899383dde263703a3fa12563c74d18e53ea63b5761fb08be57ae",
+      "source": "https://ftp.math.utah.edu/pub/tex/historic/systems/texlive/2009/texlive2009-20091107.iso",
+      "original_path": "texmf-dist/source/latex/natbib/natbib.dtx",
+      "version": "2009/07/16 8.31",
+      "reason": "Original source required by the redistributed natbib.sty header; not executed by the adapter"
+    }
+  }
+}

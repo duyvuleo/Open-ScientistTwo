@@ -1,0 +1,58 @@
+{
+  "schema_version": "open-scientisttwo-release-verification-v1",
+  "date": "2026-10-26",
+  "software_version": "0.4.0",
+  "release_status": "experimental research preview",
+  "implementation_identity_sha256": "b848712ada25c49873252de66bef39b440a36c1b434e254c94136fe8b794e392",
+  "verification_tool_sha256": "6601aad997f067ab428dcbd46cfcd4d69104d30cde855b179dbe1e476e0e2394",
+  "verification_platform": "macOS arm64 controller; Linux arm64 experiment and PDF containers",
+  "tests": {
+    "main_suite_passed": 2379,
+    "main_suite_skipped": 1,
+    "skip_reason": "Linux /proc process sampler does not run on macOS",
+    "container_tests_deselected": 15,
+    "release_verifier_tests_passed": 20,
+    "live_model_calls": 0,
+    "upstream_requirement": "Bundled PaperOrchestra plus required pinned MLAgentBench and MLE-bench source fixtures; preparation extras installed"
+  },
+  "lint": "pass",
+  "installed_wheel": {
+    "status": "pass",
+    "verified_source_and_resource_files": 189,
+    "outside_source_checkout": true,
+    "bundled_paperorchestra_files": 17,
+    "bundled_paperorchestra_revision": "ca1b3fa01c2970fc7cda32d16245db38d57b3f56"
+  },
+  "offline_end_to_end": {
+    "audit": "pass",
+    "engine": "docker",
+    "live_model_calls": 0,
+    "max_prompt_chars": 1000000,
+    "no_op_resume": "pass",
+    "observations": 16,
+    "outcome": "development_improvement",
+    "paperorchestra": {
+      "pdf_operations": [
+        "compile",
+        "render",
+        "text"
+      ],
+      "revision": "ca1b3fa01c2970fc7cda32d16245db38d57b3f56",
+      "runtime_attempts": 4,
+      "source": "bundled",
+      "successful_runtime_attempts": 4
+    },
+    "pdf_required": true,
+    "real_container_reexecution": "pass",
+    "scope": "Generated CPU task with scripted agent responses; mechanical workflow verification, not live-agent research or scientific validity",
+    "status": "pass",
+    "task": "quadratic-cpu",
+    "writer_backend": "paperorchestra"
+  },
+  "unverified": [
+    "Live autonomous end-to-end completion on current release",
+    "Full actual-task validation of all13MLAgentBench protocols",
+    "Scientific novelty and automated reviewer quality"
+  ],
+  "publication_boundary": "This is a sanitized maintainer verification summary. Raw model, experiment and machine-specific archives are excluded; public commands and CI reproduce the checks."
+}

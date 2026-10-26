@@ -1,0 +1,15 @@
+{
+  "model": "MODEL_ID",
+  "max_calls": 40,
+  "token_stop_threshold": 400000,
+  "campaign_seconds": 1800,
+  "call_seconds": 120,
+  "max_experiments": 30,
+  "model_retries": 0,
+  "workflow": {
+    "profile": "research-pilot",
+    "writer_backend": "canonical",
+    "network_literature": false,
+    "literature": {"providers": ["local"]}
+  }
+}
