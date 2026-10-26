@@ -284,6 +284,16 @@ def verify_completed_campaign(args, work, run):
     write_json(work / "run.json", run)
     inspected = cli(["inspect", root], cwd=work, output=work / "inspect-before")
     verify_offline(inspected)
+    # Check resume against the just-completed campaign. Audit deliberately adds
+    # a reexecution operation; a later resume would refresh reports to include
+    # that new evidence and would no longer be a byte-for-byte no-op baseline.
+    before = campaign_snapshot(root)
+    print("Checking completed-campaign resume adds no operations or evidence", flush=True)
+    resumed = cli(["resume", root], cwd=work, output=work / "resume")
+    require(resumed == run, "Resume changed the completed campaign result")
+    require(campaign_snapshot(root) == before, "Completed resume changed ledger or evidence bytes")
+    inspected_after = cli(["inspect", root], cwd=work, output=work / "inspect-after")
+    verify_offline(inspected_after)
     print("Reexecuting the selected development experiment for the audit", flush=True)
     audit = cli(["audit", root, "--include-final"], cwd=work, output=work / "audit")
     require(audit.get("status") == "pass", "Mechanical evidence audit did not pass")
@@ -297,18 +307,13 @@ def verify_completed_campaign(args, work, run):
     require(observations and all(item.get("measurement_origin") == "container"
                                 for item in observations),
             "E2E observations contain missing or synthetic measurements")
-    before = campaign_snapshot(root)
-    print("Checking completed-campaign resume adds no operations or evidence", flush=True)
-    resumed = cli(["resume", root], cwd=work, output=work / "resume")
-    require(resumed == run, "Resume changed the completed campaign result")
-    require(campaign_snapshot(root) == before, "Completed resume changed ledger or evidence bytes")
-    inspected_after = cli(["inspect", root], cwd=work, output=work / "inspect-after")
-    verify_offline(inspected_after)
     summary = {"status": "pass", "task": json.loads(task.read_text())["name"],
                "engine": args.engine, "writer_backend": args.writer_backend,
                "outcome": run["outcome"], "observations": len(observations),
                "audit": "pass", "real_container_reexecution": "pass",
                "no_op_resume": "pass", "live_model_calls": 0,
+               "verification_order": ["campaign", "inspect", "completed_resume",
+                                      "audit_reexecution"],
                "pdf_required": bool(args.compiler_image),
                "max_prompt_chars": prompt_budget(args),
                "scope": "Generated CPU task with scripted agent responses; mechanical workflow "

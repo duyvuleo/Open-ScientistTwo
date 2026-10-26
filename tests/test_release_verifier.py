@@ -52,7 +52,10 @@ def test_cli_keeps_failed_parse_logs_without_creating_result(tmp_path, monkeypat
     assert not (tmp_path / "run.json").exists()
 
 
-def test_completed_campaign_helper_never_launches_initial_run(tmp_path, monkeypatch):
+@pytest.mark.parametrize("resume_changes_operations", [False, True])
+def test_completed_campaign_helper_never_launches_initial_run(
+    tmp_path, monkeypatch, resume_changes_operations,
+):
     work = tmp_path / "work"
     campaign = work / "runs" / "completed-campaign"
     campaign.mkdir(parents=True)
@@ -66,18 +69,33 @@ def test_completed_campaign_helper_never_launches_initial_run(tmp_path, monkeypa
         "observations": [{"measurement_origin": "container"}],
     }}
     commands = []
+    state = {"operations": 1, "report_operations": 1}
 
     def cli(arguments, **kwargs):
         commands.append(arguments[0])
+        if arguments[0] == "audit":
+            state["operations"] += 1
+        if arguments[0] == "resume":
+            if resume_changes_operations:
+                state["operations"] += 1
+            state["report_operations"] = state["operations"]
         return {"inspect": inspected, "audit": audit, "resume": run}[arguments[0]]
 
     monkeypatch.setattr(verifier, "cli", cli)
-    monkeypatch.setattr(verifier, "campaign_snapshot", lambda root: {"stable": True})
+    monkeypatch.setattr(verifier, "campaign_snapshot", lambda root: dict(state))
     args = SimpleNamespace(task=task, engine="docker", writer_backend="canonical",
                            compiler_image=None, max_prompt_chars=200_000)
+    if resume_changes_operations:
+        with pytest.raises(ValueError, match="Completed resume changed ledger or evidence bytes"):
+            verifier.verify_completed_campaign(args, work, run)
+        assert commands == ["inspect", "resume"]
+        return
     result = verifier.verify_completed_campaign(args, work, run)
     assert result["status"] == "pass"
-    assert commands == ["inspect", "audit", "resume", "inspect"]
+    assert commands == ["inspect", "resume", "inspect", "audit"]
+    assert result["verification_order"] == ["campaign", "inspect", "completed_resume",
+                                            "audit_reexecution"]
+    assert state == {"operations": 2, "report_operations": 1}
     assert json.loads((work / "run.json").read_text()) == run
 
 

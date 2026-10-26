@@ -34,7 +34,7 @@ jobs:
       - name: Install frozen development environment
         run: uv sync --frozen --group dev
       - name: Lint source, tests, and release verifier
-        run: uv run --frozen ruff check src tests scripts/verify_release.py
+        run: uv run --frozen ruff check src tests scripts/verify_release.py scripts/prepare_ci_upstreams.py
       - name: Run offline unit and fixture tests
         run: >-
           uv run --frozen pytest -q -m 'not container and not native_container'
@@ -74,8 +74,9 @@ jobs:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           persist-credentials: false
-      # Only pinned public source is fetched. LFS data, submodules, credentials,
-      # benchmark datasets, and provider services are not required for this job.
+      # Clone pinned public source with LFS smudging disabled. A later explicit
+      # step verifies and fetches only the single leaderboard metadata file used
+      # by a fixture. No benchmark datasets, models, or submodules are fetched.
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           repository: google-research/paper-orchestra
@@ -103,6 +104,11 @@ jobs:
           python-version: '3.12'
       - name: Install frozen development environment with preparation fixtures
         run: uv sync --frozen --group dev --extra preparation
+      - name: Prepare one pinned public leaderboard metadata file
+        run: >-
+          uv run --frozen python scripts/prepare_ci_upstreams.py
+          --mlebench-root "$SCIENTISTTWO_MLEBENCH_ROOT"
+          --output .release-validation/upstream-metadata-summary.json
       - name: Run real upstream control flow with scripted model and PDF services
         run: >-
           uv run --frozen pytest -q -m 'not container and not native_container'
@@ -120,6 +126,7 @@ jobs:
           path: |
             .release-validation/upstream-tests.xml
             .release-validation/upstream-summary.json
+            .release-validation/upstream-metadata-summary.json
           include-hidden-files: true
           retention-days: 14
 

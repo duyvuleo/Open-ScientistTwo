@@ -1,6 +1,7 @@
 """Synthetic metadata tests; manifest creation makes no model or runtime calls."""
 
 import json
+import re
 
 import pytest
 from pydantic import ValidationError
@@ -145,7 +146,7 @@ def test_cli_rejects_out_of_range_allowances_before_callbacks_or_writes(
         ]
     result = CliRunner().invoke(app, args + ["--supplementary-seed-count", str(value)])
     assert result.exit_code == 2
-    assert "supplementary-seed-count" in result.output
+    assert "supplementary-seed-count" in re.sub(r"\x1b\[[0-?]*[ -/]*[@-~]", "", result.output)
     assert not output.exists() and not output.parent.exists()
     assert not calls and not backend_calls
 

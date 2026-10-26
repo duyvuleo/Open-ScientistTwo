@@ -1,6 +1,7 @@
 """Synthetic metadata fixtures for live protocol binding; no model/runtime calls."""
 
 import json
+import re
 
 import pandas as pd
 import pytest
@@ -204,7 +205,7 @@ def test_benchmark_export_live_cli_rejects_more_than_one_before_export(tmp_path,
                                      "--agent-output-retries", "2"])
     assert result.exit_code == 2
     assert not exported and not backend_calls and not output.exists()
-    assert "agent-output-retries" in result.output
+    assert "agent-output-retries" in re.sub(r"\x1b\[[0-?]*[ -/]*[@-~]", "", result.output)
 
 
 @pytest.mark.parametrize("option,expected", [(None, 0), (1, 1)])

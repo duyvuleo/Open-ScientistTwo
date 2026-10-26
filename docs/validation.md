@@ -45,9 +45,11 @@ uv run --frozen python scripts/verify_release.py container \
   --task examples/quickstart.json --image scientisttwo-worker:0.1
 ```
 
-The verifier runs the real CPU campaign, re-executing audit, and completed resume
-with scripted agents. It checks that resume adds no operations or changes to
-sealed evidence, and preserves the attempt's local receipts. Pass `--context`
+The verifier runs the real CPU campaign, checks completed resume, and then runs
+the re-executing audit with scripted agents. It checks that resume adds no
+operations or changes to sealed evidence before the audit records its own
+re-execution. A later resume can refresh the report to include that audit
+evidence. The verifier preserves the attempt's local receipts. Pass `--context`
 for an existing named Docker context. After preparing the
 [PDF container](paperorchestra.md#prepare-the-pdf-container), verify the bundled
 writer separately:
