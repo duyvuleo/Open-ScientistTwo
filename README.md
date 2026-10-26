@@ -21,7 +21,7 @@ before interpreting a successful run.
 
 Local release checks passed on 26 October 2026, including an installed-wheel
 CPU/PaperOrchestra campaign, real PDF operations, audit, and unchanged completed
-resume. See the [verification record](docs/validation.md#current-public-release)
+resume. See the [verification record](docs/validation.md#api-provider-extension)
 for source identity, test counts, and limits. Hosted results are tracked in the
 [release workflow](https://github.com/duyvuleo/Open-ScientistTwo/actions/workflows/release.yml).
 
