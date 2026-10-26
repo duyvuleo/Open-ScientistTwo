@@ -47,6 +47,9 @@ def _ledger_files(root):
 
 def capture_resume_snapshot(store):
     """Capture exact durable work; the caller may register this returned object."""
+    config_ref = store.get("live_spec_ref")
+    config = LiveSpec.model_validate(store.json(config_ref)) if config_ref else None
+    api = _backend_name(config) != "codex"
     result = {"schema_version": "minimal-live-resume-snapshot-v1", "store_root": str(store.root),
             "spec_ref": store.get("live_spec_ref"), "task_ref": store.get("task_ref"),
             "deadline": store.get("live_deadline"), "state": store.get("live_state"),
@@ -54,11 +57,11 @@ def capture_resume_snapshot(store):
             "final_results_sha256": digest(canonical(store.get("live_final"))),
             "manuscript_bundle_ref": store.get("research_manuscript_bundle"),
             "final_bundle_ref": store.get("research_final_bundle"),
-            "model_accounting_ref": store.get("live_pilot_model_accounting"),
+            "model_accounting_ref": store.get("api_model_accounting_ref" if api else "live_pilot_model_accounting"),
             "ledgers": {table: {"count": len(rows), "sha256": digest(canonical(rows))}
                         for table in ("live_operations", "jobs", "calls", "events")
                         for rows in [_rows(store, table)]},
-            "model_ledger_files": _ledger_files(store.root / "model-ledger")}
+            "model_ledger_files": _ledger_files(store.root / ("api-model-ledger" if api else "model-ledger"))}
     if store.get("inherited_model_accounting_ref"):
         from .live_pilot import validate_inherited_model_accounting
         config = LiveSpec.model_validate(store.json(store.get("live_spec_ref")))
@@ -140,13 +143,18 @@ def _phase_outcome(store, task, candidate, baseline):
             "statistical_significance": "not_claimed"}
 
 
+def _backend_name(config):
+    """Codex remains the default for historical declarations without a provider."""
+    return getattr(getattr(config, "provider", None), "kind", "codex")
+
+
 def _roles(store, config):
     roles = Counter()
     for row in store.db.execute("SELECT * FROM calls WHERE key LIKE 'live-agent/%'"):
         key = row["key"][len("live-agent/"):]
         request = store.json(store.get("request/" + key))
         response = AgentResult.model_validate(store.json(row["output_ref"]))
-        if (response.synthetic or response.backend != "codex" or response.model != config.model
+        if (response.synthetic or response.backend != _backend_name(config) or response.model != config.model
                 or row["input_hash"] != digest(canonical(request))):
             raise IntegrityError("Agent provenance or exact request binding differs")
         operations = [op for op in store.db.execute("SELECT * FROM live_operations WHERE kind='model'")
@@ -159,6 +167,9 @@ def _roles(store, config):
 
 
 def _model_accounting(store, config):
+    if _backend_name(config) != "codex":
+        from ..providers.audit import verify_api_accounting
+        return verify_api_accounting(store, config)
     if store.get("inherited_model_accounting_ref"):
         return _composite_model_accounting(store, config)
     root = store.root / "model-ledger"
@@ -297,7 +308,8 @@ def verify_minimal_live(store, *, audit_ref, resume_before_ref, resume_after_ref
         config = LiveSpec.model_validate(store.json(store.get("live_spec_ref")))
         task = TaskSpec.model_validate(store.json(store.get("task_ref")))
         catalog = {"classification": CLASSIFICATION, "regression": REGRESSION, "optimization": OPTIMIZATION}
-        if (config.model != "gpt-6-astra" or config.engine_version != "research-v2"
+        if ((_backend_name(config) == "codex" and config.model != "gpt-6-astra")
+                or config.engine_version != "research-v2"
                 or config.workflow.writer_backend != "paperorchestra"
                 or task.adapter not in catalog or not set(task.datasets) <= set(catalog[task.adapter])
                 or config.development.adapter != "bundled-pilot"
@@ -311,8 +323,8 @@ def verify_minimal_live(store, *, audit_ref, resume_before_ref, resume_after_ref
                 or config.development.subset_fraction != task.subset_fraction
                 or config.development.epsilon != task.improvement_epsilon
                 or len(task.seeds) != 3 or config.development.seeds != task.seeds
-                or store.get("live_backend") != {"backend": "codex", "synthetic": False, "model": config.model}):
-            raise IntegrityError("This acceptance contract requires real Astra roles, PaperOrchestra and an exact frozen bundled task protocol")
+                or store.get("live_backend") != {"backend": _backend_name(config), "synthetic": False, "model": config.model}):
+            raise IntegrityError("This acceptance contract requires recorded live roles, PaperOrchestra and an exact frozen bundled task protocol")
         report["task"] = {"task_ref": store.get("task_ref"), "name": task.name, "adapter": task.adapter,
             "datasets": task.datasets, "subset_datasets": task.subset_datasets, "seeds": task.seeds,
             "data_seed": task.data_seed, "split_seed": task.split_seed, "subset_fraction": task.subset_fraction,

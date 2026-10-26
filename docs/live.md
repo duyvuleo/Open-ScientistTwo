@@ -5,6 +5,12 @@ opt-in path that can consume model quota and compute. Authenticate the selected
 model transport outside this repository; do not put credentials in task JSON,
 manifests, reports, or committed files.
 
+Providers include Codex CLI, OpenAI, Anthropic/Claude, and custom
+OpenAI-compatible endpoints. See [model providers](model-providers.md) for API
+configuration, supported response modes, image capability and secret handling.
+One provider/model is frozen per campaign; the same backend supplies its research
+and integrated writing roles.
+
 Every live attempt needs an explicit model identifier, maximum calls, observed
 token stop threshold, campaign and per-call deadlines, and experiment limit.
 The threshold stops new calls after recorded usage reaches it; an in-flight call
@@ -15,7 +21,9 @@ unknown, preserve the evidence and resolve that state before authorizing a retry
 
 Copy [live-options.example.json](../examples/live-options.example.json) to a
 local options file and replace `MODEL_ID` with an available, explicitly selected
-model. The example declares 40 calls, a 400,000 observed-token threshold,
+model. This template defaults to Codex CLI. The
+[provider templates](model-providers.md#configure-a-campaign) select direct API
+backends without requiring Codex. The example declares 40 calls, a 400,000 observed-token threshold,
 30 experiments, 1,800 campaign seconds, and 120 seconds per call. These are
 illustrative ceilings, not an estimate that the full workflow will finish.
 The writer is explicitly `canonical` and literature is local-only.
@@ -28,6 +36,7 @@ export SCIENTISTTWO_WORKER_IMAGE="$(docker image inspect scientisttwo-worker:0.1
 uv run scientisttwo live-pilot create \
   examples/quickstart.json live-options.local.json live-manifest.local.json \
   --image "$SCIENTISTTWO_WORKER_IMAGE"
+uv run scientisttwo live-pilot check live-manifest.local.json
 ```
 
 Review the generated manifest. The explicit execution commands are:
@@ -48,6 +57,8 @@ requires a new manifest and campaign rather than editing a frozen launch.
 To use PaperOrchestra in a live pilot, set the options' `workflow.writer_backend`
 to `paperorchestra` and supply the immutable `workflow.compiler_image` after
 preparing the [PDF container](paperorchestra.md#prepare-the-pdf-container).
+An API provider must also declare `provider.vision: true` and use a model that
+supports the page images; unsupported image capability is rejected before work.
 The pinned writing engine is included and is used by default;
 `workflow.paperorchestra_root` is an optional external-source override. Its inner
 calls, binding steps, and PDF work consume the same overall campaign budget.

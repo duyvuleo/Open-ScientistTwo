@@ -241,7 +241,7 @@ def load_development(native, config):
 
 
 def implementation_identity():
-    from .. import backends, process, store, artifacts, runtime_contracts, runtime_profiles, environment_probe
+    from .. import backends, process, store, models, artifacts, runtime_contracts, runtime_profiles, environment_probe
     from ..benchmarks.files import native_identity
 
     result = {"native/" + k: v for k, v in native_identity().items()}
@@ -256,8 +256,11 @@ def implementation_identity():
     studies = Path(__file__).parents[1] / "studies"
     result.update({"studies/" + p.relative_to(studies).as_posix(): file_hash(p)
                    for p in sorted(studies.rglob("*.py"))})
+    providers = Path(__file__).parents[1] / "providers"
+    result.update({"providers/" + p.relative_to(providers).as_posix(): file_hash(p)
+                   for p in sorted(providers.rglob("*.py"))})
     result.update(
-        {"core/" + Path(m.__file__).name: file_hash(m.__file__) for m in (backends, process, store, artifacts, runtime_contracts, runtime_profiles, environment_probe)}
+        {"core/" + Path(m.__file__).name: file_hash(m.__file__) for m in (backends, process, store, models, artifacts, runtime_contracts, runtime_profiles, environment_probe)}
     )
     locks = Path(runtime_profiles.__file__).with_name("runtime_locks.json")
     if locks.is_file():

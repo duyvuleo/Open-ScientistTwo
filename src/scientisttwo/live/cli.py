@@ -17,9 +17,10 @@ from .workspace_task import task_spec, freeze_workspace, preflight
 from .suite_cli import app as suite_app
 from .workspace import validate_baseline_contract, live_readiness
 from ..research.policy import profile_updates
+from ..providers.config import ModelProvider, readiness as provider_readiness
 
 app = typer.Typer(
-    no_args_is_help=True, help="Explicitly budgeted Codex research on native benchmarks."
+    no_args_is_help=True, help="Explicitly budgeted live-model research on native benchmarks."
 )
 app.add_typer(suite_app, name="suite")
 
@@ -72,6 +73,15 @@ def create(
     writer_backend: str | None = typer.Option(None, help="Research defaults to paperorchestra; canonical is an explicit alternative."),
     paperorchestra_root: Path | None = typer.Option(None, help="Optional pinned-source override; the PaperOrchestra writer uses its bundled engine by default."),
     paperorchestra_swap_policy: str = typer.Option("deny", help="PDF containers: deny swap, or explicitly inherit a Podman worker's swap policy."),
+    provider: str = typer.Option("codex", help="codex, openai, anthropic, or openai_compatible."),
+    base_url: str | None = typer.Option(None, help="Explicit API base URL; required for a custom compatible server."),
+    api_key_env: str | None = typer.Option(None, help="Environment-variable name only; never supply a credential value."),
+    max_output_tokens: int | None = typer.Option(None, min=1, help="Explicit API output-token limit; required for API providers."),
+    structured_output: str = typer.Option("json_schema", help="Explicit json_schema, json_object or prompt response mode; no automatic fallback."),
+    vision: bool = typer.Option(False, help="Declare that the selected API model supports images; required for PaperOrchestra."),
+    temperature: float | None = None,
+    api_version: str | None = typer.Option(None, help="Optional explicit Anthropic API version."),
+    allow_insecure_http: bool = typer.Option(False, help="Explicitly permit non-loopback HTTP for a trusted custom endpoint."),
 ):
     """Freeze live configuration without enabling execution or making model calls."""
     native = task_spec(json.loads(native_manifest.read_text()))
@@ -81,6 +91,10 @@ def create(
         if development
         else default_development(native),
         model=model,
+        provider=ModelProvider(kind=provider, base_url=base_url, api_key_env=api_key_env,
+            max_output_tokens=max_output_tokens, structured_output=structured_output,
+            vision=vision, temperature=temperature, api_version=api_version,
+            allow_insecure_http=allow_insecure_http),
         max_calls=max_calls,
         campaign_seconds=seconds,
         mode=mode,
@@ -102,6 +116,11 @@ def create(
     config.workflow.paperorchestra_swap_policy = paperorchestra_swap_policy
     config.model_retries = 0
     config = LiveSpec.model_validate(config.model_dump(mode="json"))
+    if config.provider.kind != "codex" and config.token_stop_threshold is None:
+        raise ValueError("API live manifests require an explicit token stop threshold")
+    if (config.provider.kind != "codex" and config.workflow.writer_backend == "paperorchestra"
+            and not config.provider.vision):
+        raise ValueError("PaperOrchestra requires a model provider with vision enabled")
     if config.workflow.writer_backend == "paperorchestra":
         from ..integrations.paperorchestra.runtime import verify_upstream
         verify_upstream(Path(config.workflow.paperorchestra_root))
@@ -135,12 +154,13 @@ def check(manifest: Path):
     validate_baseline_contract(adapter)
     checks["development_adapter"] = config.development.adapter
     checks["adapter_live_readiness"] = live_readiness(adapter)
-    checks["codex_installed"] = shutil.which("codex") is not None
-    checks["codex_authenticated"] = False
-    if checks["codex_installed"]:
-        # Do not print or persist the CLI's authentication status text.
-        status = run_process(["codex", "login", "status"], 15)
-        checks["codex_authenticated"] = status.code == 0 and not status.timed_out
+    checks.update(check_provider(config.provider))
+    if config.provider.kind != "codex" and (
+        config.engine_version != "research-v2" or config.token_stop_threshold is None
+        or config.model_retries != 0
+    ):
+        checks["provider_ready"] = False
+        checks.setdefault("errors", []).append("API live execution requires research-v2, a token threshold and model_retries=0")
     prefix = [config.native.runtime] + (
         ["--context", config.native.context] if config.native.context else []
     )
@@ -162,11 +182,13 @@ def check(manifest: Path):
             verify_upstream(Path(config.workflow.paperorchestra_root))
         except (OSError, ValueError):
             checks["writer_ready"] = False
+        if config.provider.kind != "codex" and not config.provider.vision:
+            checks["writer_ready"] = False
     checks["ready"] = (
         checks["ready"]
         and checks["implementation_matches"]
         and checks["adapter_live_readiness"]["ready"]
-        and checks["codex_authenticated"]
+        and checks["provider_ready"]
         and all(images.values())
         and checks["writer_ready"]
     )
@@ -175,11 +197,33 @@ def check(manifest: Path):
         raise typer.Exit(2)
 
 
+def check_provider(provider):
+    """Check local configuration/auth presence without making an inference call."""
+    checks = {"provider": provider.kind, "model_access": "unverified_without_inference"}
+    if provider.kind == "codex":
+        checks["codex_installed"] = shutil.which("codex") is not None
+        checks["codex_authenticated"] = False
+        if checks["codex_installed"]:
+            # The CLI's status text may contain account details; retain only a bool.
+            try:
+                status = run_process(["codex", "login", "status"], 15)
+                checks["codex_authenticated"] = status.code == 0 and not status.timed_out
+            except OSError:
+                pass
+        checks["provider_ready"] = checks["codex_authenticated"]
+    else:
+        checks["provider_configuration"] = provider_readiness(provider)
+        checks["provider_ready"] = checks["provider_configuration"]["ready"]
+    return checks
+
+
 def execute(config, output, allow_live, allow_literature_network=False, *, executable="codex"):
     if not allow_live:
         raise ValueError(
             "Live model calls are disabled. Pass --allow-live to authorize this manifest's model and budgets."
         )
+    if config.provider.kind != "codex" and config.engine_version != "research-v2":
+        raise ValueError("API providers require research-v2; legacy campaigns remain Codex-only")
     output = output.resolve()
     for path in (
         config.native.repository,

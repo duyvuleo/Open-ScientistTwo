@@ -209,6 +209,9 @@ class ResearchController(ResearchStages):
             "model": self.config.model,
             "prompt_version": "research-v2-complete-workflow" if self.research_enabled else "native-live-v6-typed-manuscript-revisions",
         }
+        request_guard = getattr(self.backend, "validate_request_for_storage", None)
+        if request_guard is not None:
+            request_guard(raw_request)
         raw_ref = self.store.put_json(raw_request, "agent-raw-request")
         self.store.set("raw_request/" + key, raw_ref)
         inputs, changes = present_inputs(
@@ -293,13 +296,26 @@ class ResearchController(ResearchStages):
                 )
                 return parsed
             except (BackendError, ValueError, OSError) as error:
+                # API completions retain usage even if JSON/domain validation
+                # failed. Missing usage is explicit and must block dispatch on
+                # resume; never silently convert it into a zero-cost retry.
+                from ..providers.backend import APIBackendError
+                failure = {"error": str(error)}
+                failure_tokens = 0
+                if isinstance(error, APIBackendError):
+                    failure.update(usage_known=error.usage_known, usage=error.usage,
+                                   api_call_id=error.call_id, api_receipt_ref=error.receipt_ref)
+                    if error.usage_known:
+                        failure_tokens = sum(error.usage.get(k, 0) for k in ("input_tokens", "output_tokens"))
                 self.budget.finish(
-                    operation, "failed", {"error": str(error)}, time.monotonic() - started
+                    operation, "failed", failure, time.monotonic() - started, failure_tokens
                 )
                 self.store.event(
                     operation + "/failure",
                     self.store.get("live_state", {"stage": "created"})["stage"], str(error)
                 )
+                if isinstance(error, APIBackendError) and not error.usage_known:
+                    raise
         raise BackendError("Model retry limit exhausted: " + key)
 
     def comparison(self, result, reference):
@@ -1107,7 +1123,7 @@ class ResearchController(ResearchStages):
             raise IntegrityError("Agent backend/provenance changed during campaign")
         self.store.set("live_backend", provenance)
         if not self.store.get("live_sources_ref"):
-            from .. import backends, process, store
+            from .. import backends, process, store, models
             from ..benchmarks import runner as native_runner
 
             paths = [
@@ -1115,8 +1131,9 @@ class ResearchController(ResearchStages):
                 *(Path(__file__).parents[1] / "live").glob("*.py"),
                 *(Path(__file__).parents[1] / "integrations").rglob("*.py"),
                 *(Path(__file__).parents[1] / "studies").rglob("*.py"),
+                *(Path(__file__).parents[1] / "providers").rglob("*.py"),
                 *Path(native_runner.__file__).parent.glob("*.py"),
-                *[Path(m.__file__) for m in (backends, process, store)],
+                *[Path(m.__file__) for m in (backends, process, store, models)],
             ]
             snapshots = {
                 str(p.relative_to(Path(__file__).parents[1])): self.store.put_file(

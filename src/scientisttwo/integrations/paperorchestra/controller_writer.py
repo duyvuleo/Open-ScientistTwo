@@ -293,6 +293,11 @@ def _image_attachments(backend, images):
     if not images or backend.synthetic:
         yield
         return
+    from ...providers.backend import APIBackend
+    if isinstance(backend, APIBackend):
+        with backend.attach_images(images):
+            yield
+        return
     if not isinstance(backend, CodexBackend):
         raise AgentOutputError("Configured writer backend cannot attach PaperOrchestra page images")
     original = backend.executor

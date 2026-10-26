@@ -13,7 +13,7 @@ import time
 from typing import Literal
 import uuid
 
-from pydantic import Field, model_validator
+from pydantic import ConfigDict, Field, model_validator
 
 from ..backends import CodexBackend
 from ..live.adapters import implementation_identity
@@ -24,6 +24,7 @@ from ..store import IntegrityError, canonical, digest, file_digest
 from ..studies import media_relay as relay
 from .literature import LiteratureConfig, SourceRecord
 from .policy import ResearchPolicy
+from ..providers.config import ModelProvider
 
 
 INHERITED_ACCOUNTING_VERSION = "scientisttwo-inherited-model-accounting-v1"
@@ -151,7 +152,9 @@ def validate_inherited_model_accounting(store, config, deadline=None):
 
 
 class LivePilotOptions(Record):
-    model: str = Field(min_length=1, pattern=r"^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,99}$")
+    model_config = ConfigDict(extra="forbid", hide_input_in_errors=True)
+    model: str = Field(min_length=1, pattern=r"^[A-Za-z0-9][A-Za-z0-9_.:/+@-]{0,255}$")
+    provider: ModelProvider = Field(default_factory=ModelProvider)
     max_calls: int = Field(ge=1, le=1000)
     token_stop_threshold: int = Field(gt=0, le=10_000_000)
     campaign_seconds: float = Field(gt=0, le=14_400)
@@ -177,10 +180,19 @@ class LivePilotOptions(Record):
 
     @model_validator(mode="after")
     def explicit_live_scope(self):
+        from ..providers.config import assert_credential_free
+        assert_credential_free(self.provider, self.model_dump(mode="json"))
+        if self.provider.kind == "codex":
+            import re
+            if not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9_.:/-]{0,99}", self.model):
+                raise ValueError("Codex model identifier exceeds its frozen CLI transport contract")
         if self.model.startswith(("scripted", "fixture")):
             raise ValueError("Live pilot options require an explicit non-fixture model identifier")
         if self.workflow.profile == "offline-pilot" or self.workflow.network_literature:
             raise ValueError("A live pilot requires a research workflow with frozen local literature")
+        if (self.provider.kind != "codex" and self.workflow.writer_backend == "paperorchestra"
+                and not self.provider.vision):
+            raise ValueError("PaperOrchestra requires a model provider with vision enabled")
         literature = LiteratureConfig.model_validate(self.workflow.literature)
         if literature.providers != ["local"]:
             raise ValueError("This live pilot entrypoint permits only frozen local literature")
@@ -315,12 +327,33 @@ def run_prepared_live(store, config, adapter, runner, *, allow_live=False, execu
         raise IntegrityError("Live research source or registered evidence changed")
     if store.get("live_spec_ref") and store.json(store.get("live_spec_ref")) != config.model_dump(mode="json"):
         raise IntegrityError("Live research specification changed")
+    if config.provider.kind != "codex" and any(store.get(key) for key in (
+        "inherited_model_accounting_ref", "contract_repair_manifest_ref", "study_plan_ref",
+        "study_compute_budget", "native_binding_recovery_manifest_ref",
+    )):
+        raise IntegrityError("API providers require their own campaign; Codex repair/study ledgers cannot be reused")
     if store.get("inherited_model_accounting_ref"):
         validate_inherited_model_accounting(store, config)
     state = store.get("live_state", {})
     if state.get("status") == "complete":
         # Even the backend/executor constructor is skipped on completed resume.
         return state
+    if config.provider.kind != "codex":
+        if executable != "codex":
+            raise ValueError("Selecting a CLI executable applies only to the Codex provider")
+        if config.workflow.writer_backend == "paperorchestra" and not config.provider.vision:
+            raise ValueError("PaperOrchestra requires a model provider with vision enabled")
+        from ..providers.backend import APIBackend
+        from .controller import ResearchController
+        runner.budget.remaining()
+        backend = APIBackend(store, config, allow_live=True, process_executor=process_executor)
+        controller = ResearchController(store, config, adapter, backend, runner, budget=runner.budget,
+                                        allow_network_literature=allow_network_literature)
+        try:
+            return controller.run()
+        finally:
+            store.set("api_model_accounting_ref",
+                      store.put_json(backend.accounting(), "api-model-accounting"))
     if store.get("contract_repair_manifest_ref"):
         from .contract_repair import ContractRepairBudget
         runner.budget = ContractRepairBudget(runner.budget)

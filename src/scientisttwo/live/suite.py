@@ -13,7 +13,7 @@ import time
 import random
 from typing import Literal
 
-from pydantic import Field, model_validator
+from pydantic import ConfigDict, Field, model_validator
 
 from ..models import Record
 from ..store import IntegrityError, Store, canonical, digest, file_digest
@@ -34,6 +34,7 @@ class SuiteAssignment(Record):
 
 
 class SuiteSpec(Record):
+    model_config = ConfigDict(extra="forbid", hide_input_in_errors=True)
     schema_version: Literal[1] = 1
     name: str = Field(pattern=r"^[a-zA-Z0-9_-]+$")
     wall_seconds: float = Field(gt=0)
@@ -125,6 +126,14 @@ class SuiteBudget:
         self.remaining()
         if kind == "probe":
             return
+        if kind == "model":
+            for operation in self.store.db.execute(
+                "SELECT status,result_ref FROM suite_operations WHERE kind='model'"
+            ):
+                if operation["result_ref"]:
+                    receipt = self.store.json(operation["result_ref"])
+                    if isinstance(receipt, dict) and receipt.get("usage_known") is False:
+                        raise AmbiguousCall("Suite API usage remains unknown; no further model dispatch is permitted")
         count = self.store.db.execute(
             "SELECT count(*) FROM suite_operations WHERE kind=?", (kind,)
         ).fetchone()[0]
@@ -245,15 +254,41 @@ def check_assignment(config):
     native = config.native
     prefix = [native.runtime] + (["--context", native.context] if native.context else [])
     images = {}
-    for name in {native.image, native.grader_image}:
+    wanted_images = {native.image, native.grader_image}
+    if config.workflow.compiler_image:
+        wanted_images.add(config.workflow.compiler_image)
+    for name in wanted_images:
         try:
             result = run_process(prefix + ["image", "inspect", name, "--format", "{{.Id}}"], 15)
             images[name] = result.stdout.strip() if result.code == 0 else None
         except OSError:
             images[name] = None
     checks["images"] = images
-    checks["codex_installed"] = shutil.which("codex") is not None
-    checks["ready"] = checks["ready"] and checks["codex_installed"] and all(images.values())
+    checks["provider"] = config.provider.kind
+    if config.provider.kind == "codex":
+        checks["codex_installed"] = shutil.which("codex") is not None
+        checks["provider_ready"] = checks["codex_installed"]
+    else:
+        from ..providers.config import readiness
+        checks["provider_configuration"] = readiness(config.provider)
+        checks["provider_ready"] = checks["provider_configuration"]["ready"]
+        if (config.engine_version != "research-v2" or config.token_stop_threshold is None
+                or config.model_retries != 0):
+            checks["provider_ready"] = False
+            checks.setdefault("errors", []).append(
+                "API live execution requires research-v2, a token threshold and model_retries=0")
+        if config.workflow.writer_backend == "paperorchestra" and not config.provider.vision:
+            checks["provider_ready"] = False
+            checks.setdefault("errors", []).append("PaperOrchestra requires provider vision capability")
+    checks["writer_ready"] = True
+    if config.workflow.writer_backend == "paperorchestra":
+        from ..integrations.paperorchestra.runtime import verify_upstream
+        try:
+            verify_upstream(Path(config.workflow.paperorchestra_root))
+        except (OSError, ValueError):
+            checks["writer_ready"] = False
+    checks["ready"] = (checks["ready"] and checks["provider_ready"]
+                       and checks["writer_ready"] and all(images.values()))
     checks["model_access"] = "unverified_without_inference"
     checks["authentication"] = "not_checked"
     return checks
@@ -278,6 +313,8 @@ def execute_assignment(config, output, shared, *, allow_literature_network=False
     from .runtime import Budget, DevelopmentRunner
     from .workspace import live_readiness
 
+    if config.provider.kind != "codex" and config.engine_version != "research-v2":
+        raise ValueError("API providers require research-v2; legacy suites remain Codex-only")
     with locked(output):
         if not (output / "campaign.sqlite").exists() and any(
             p.name != ".campaign.lock" for p in output.iterdir()
@@ -302,6 +339,10 @@ def execute_assignment(config, output, shared, *, allow_literature_network=False
             live_readiness(adapter, require=True)
             budget = Budget(store, config, shared=shared)
             runner = DevelopmentRunner(store, config, adapter, budget)
+            if config.engine_version == "research-v2":
+                from ..research.live_pilot import run_prepared_live
+                return run_prepared_live(store, config, adapter, runner, allow_live=True,
+                                         allow_network_literature=allow_literature_network)
             backend = CodexBackend(
                 output / "agent", config.model, allow_live=True, timeout=config.call_seconds
             )
@@ -319,6 +360,7 @@ def _summary(config, states, operations, *, status, reason=""):
             {
                 "id": a.id,
                 "model": a.campaign.model,
+                "provider": a.campaign.provider.kind,
                 "repetition": a.repetition,
                 "benchmark": a.campaign.native.benchmark,
                 "task_id": a.campaign.native.task_id,
@@ -406,6 +448,10 @@ def run_suite(config, output, *, allow_live=False, executor=execute_assignment, 
                     try:
                         budget.ensure_available("model")
                         budget.ensure_available("experiment")
+                    except AmbiguousCall:
+                        status = "blocked"
+                        reason = "Unknown model usage requires investigation before another assignment"
+                        break
                     except LiveBudgetExhausted as error:
                         status, reason = "budget_exhausted", str(error)
                         break

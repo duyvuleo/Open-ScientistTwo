@@ -672,10 +672,21 @@ def audit_research(output, *, reexecute=False, include_final=False):
         }
     store = Store(output)
     checks, errors = {}, []
+    api_unverified = False
     try:
         errors.extend(store.verify())
         if errors:
             return {"status": "fail", "errors": errors, "live_model_calls": 0}
+        if (getattr(getattr(config, "provider", None), "kind", "codex") != "codex"
+                and store.get("live_backend", {}).get("synthetic") is not True):
+            from ..providers.audit import verify_api_accounting
+            try:
+                accounting = verify_api_accounting(store, config, require_complete=False)
+                checks["model_accounting"] = accounting
+                api_unverified = accounting["status"] != "pass"
+            except (ValueError, OSError, KeyError, TypeError, IntegrityError) as error:
+                checks["model_accounting"] = {"status": "fail", "error": str(error)}
+                errors.append("model_accounting: " + str(error))
         pilot = config.development.adapter == "bundled-pilot"
         if pilot:
             from .pilot_bridge import create_pilot_campaign, audit_pilot_campaign
@@ -733,7 +744,7 @@ def audit_research(output, *, reexecute=False, include_final=False):
             errors.append("Model invocation followed protected final evaluation")
         return {
             "status": ("fail" if errors else "unverified"
-                       if pilot and reexecute and base.get("reexecution") != "pass"
+                       if api_unverified or pilot and reexecute and base.get("reexecution") != "pass"
                        else "pass"),
             "checks": checks,
             "execution_audit": base,

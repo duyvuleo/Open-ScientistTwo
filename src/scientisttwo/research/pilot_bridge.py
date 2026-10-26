@@ -824,7 +824,7 @@ def create_pilot_campaign(
             raise IntegrityError("Legacy writer options conflict with the explicit live specification")
         config = LiveSpec.model_validate({**config.model_dump(mode="json"), **options.config_values()})
         store.set("live_pilot_execution_policy", {
-            "model": options.model, "backend": "codex", "synthetic_agents": False,
+            "model": options.model, "backend": options.provider.kind, "synthetic_agents": False,
             "authorization": "Explicit allow-live required by the separate live-pilot entrypoint",
             "legacy_profile_scope": "Experiment resources only; Profile.live_calls remains False and offline CLI cannot launch this campaign",
         })

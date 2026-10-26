@@ -1,0 +1,78 @@
+{
+  "schema_version": "open-scientisttwo-provider-verification-v1",
+  "date": "2026-10-26",
+  "implementation_identity_sha256": "cc94c0a58fa7b59259f8ba04edb8a579e3fce7e2694b3ea4fca97bdf72de3abc",
+  "verification_tool_sha256": "47f409aae488e9e458487acfe9a47d82c10d1f27b7ebf117032125c405a6cefa",
+  "scope": "API-provider implementation and existing workflow regression; no real model inference",
+  "tests": {
+    "passed": 2605,
+    "skipped": 1,
+    "skip_reason": "Linux /proc process sampler does not run on macOS",
+    "container_tests_deselected": 15,
+    "required_upstreams": "all pinned source fixtures",
+    "http_transport": "Actual subprocess worker with synthetic loopback HTTP servers"
+  },
+  "scripted_api_research_cycle": {
+    "status": "pass",
+    "roles": 25,
+    "completions": 61,
+    "synthetic_experiment_operations": 19,
+    "fixture_usage_tokens": 732,
+    "accounting": "exact reconciliation",
+    "completed_resume": "no additional work",
+    "scope": "Both model responses and experimental outcomes are synthetic test fixtures"
+  },
+  "installed_wheel": {
+    "status": "pass",
+    "verified_source_and_resource_files": 195,
+    "outside_source_checkout": true,
+    "bundled_paperorchestra_files": 17
+  },
+  "independent_real_offline_workflow": {
+    "audit": "pass",
+    "engine": "docker",
+    "live_model_calls": 0,
+    "max_prompt_chars": 1000000,
+    "no_op_resume": "pass",
+    "observations": 15,
+    "outcome": "development_improvement",
+    "paperorchestra": {
+      "pdf_operations": [
+        "compile",
+        "render",
+        "text"
+      ],
+      "revision": "ca1b3fa01c2970fc7cda32d16245db38d57b3f56",
+      "runtime_attempts": 4,
+      "source": "bundled",
+      "successful_runtime_attempts": 4
+    },
+    "pdf_required": true,
+    "real_container_reexecution": "pass",
+    "scope": "Generated CPU task with scripted agent responses; mechanical workflow verification, not live-agent research or scientific validity",
+    "status": "pass",
+    "task": "quadratic-cpu",
+    "verification_order": [
+      "campaign",
+      "inspect",
+      "completed_resume",
+      "audit_reexecution"
+    ],
+    "writer_backend": "paperorchestra"
+  },
+  "lint": "pass",
+  "staged_credential_scan": "pass",
+  "verification_setup": {
+    "initial_container_attempt": "Failed because installed worker was outside VM shared folders",
+    "resolution": "Installed the same wheel in an already-shared validation folder and reran; source and VM configuration unchanged",
+    "failed_attempt_preserved": true
+  },
+  "real_model_calls": 0,
+  "unverified": [
+    "Commercial API/model access",
+    "Live API-backed autonomous research quality",
+    "Compatibility of every custom inference server",
+    "All 13 actual MLAgentBench task protocols"
+  ],
+  "publication_boundary": "Sanitized verification summary only; credentials, local paths and raw research archives excluded"
+}

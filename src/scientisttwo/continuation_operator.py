@@ -92,6 +92,8 @@ def scientific_config(store):
 
 
 def construct_controller(store, config, queue, policy_path):
+    if getattr(getattr(config, "provider", None), "kind", "codex") != "codex":
+        raise ValueError("The remote study continuation transport supports only the Codex provider")
     from scientisttwo.backends import CodexBackend
     from scientisttwo.studies.budget import StudyBudget
     from scientisttwo.studies.cifar_adapter import CifarRecipeDevelopment

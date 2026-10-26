@@ -17,6 +17,9 @@ dist/
 .testbed/
 .release-validation/
 artifact-output/
+artifacts/
+model-ledger/
+api-model-ledger/
 runs/
 outputs/
 evidence/

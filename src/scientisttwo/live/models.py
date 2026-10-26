@@ -1,13 +1,14 @@
 from pathlib import Path
 from typing import Annotated, Literal
 
-from pydantic import Field, StringConstraints, model_validator
+from pydantic import ConfigDict, Field, StringConstraints, model_validator
 
 from ..models import Record
 from ..benchmarks.models import NativeSpec, relative_path
 from ..benchmarks.files import FORBIDDEN
 from .workspace_models import WorkspaceSpec
 from ..research.policy import ResearchPolicy
+from ..providers.config import ModelProvider
 
 
 class SourceFile(Record):
@@ -229,12 +230,14 @@ class DevelopmentSpec(Record):
 
 
 class LiveSpec(Record):
+    model_config = ConfigDict(extra="forbid", hide_input_in_errors=True)
     schema_version: Literal[1] = 1
     engine_version: Literal["legacy-live-v1", "research-v2"] = "legacy-live-v1"
     workflow: ResearchPolicy = Field(default_factory=ResearchPolicy)
     native: NativeSpec | WorkspaceSpec
     development: DevelopmentSpec
     model: str = Field(min_length=1)
+    provider: ModelProvider = Field(default_factory=ModelProvider)
     mode: Literal["smoke", "research"] = "smoke"
     max_calls: int = Field(ge=1)
     campaign_seconds: float = Field(gt=0)
@@ -265,6 +268,8 @@ class LiveSpec(Record):
 
     @model_validator(mode="after")
     def valid(self):
+        from ..providers.config import assert_credential_free
+        assert_credential_free(self.provider, self.model_dump(mode="json"))
         if self.native.mode != "baseline":
             raise ValueError("Live campaigns start from a frozen baseline manifest")
         if len({s.id for s in self.sources}) != len(self.sources) or any(

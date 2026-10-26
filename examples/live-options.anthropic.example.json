@@ -1,0 +1,26 @@
+{
+  "model": "MODEL_ID",
+  "max_calls": 40,
+  "token_stop_threshold": 400000,
+  "campaign_seconds": 1800,
+  "call_seconds": 120,
+  "max_experiments": 30,
+  "model_retries": 0,
+  "workflow": {
+    "profile": "research-pilot",
+    "writer_backend": "canonical",
+    "network_literature": false,
+    "literature": {
+      "providers": [
+        "local"
+      ]
+    }
+  },
+  "provider": {
+    "kind": "anthropic",
+    "api_key_env": "ANTHROPIC_API_KEY",
+    "max_output_tokens": 16384,
+    "structured_output": "json_schema",
+    "vision": false
+  }
+}

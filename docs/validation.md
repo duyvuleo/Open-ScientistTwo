@@ -4,7 +4,36 @@ Validation is scoped to a source version, task, backend, and runtime. Passing a
 unit test, executing a real experiment, and completing a live research campaign
 are different claims.
 
-## Current public release
+## API provider extension
+
+The [provider interface](model-providers.md) supports Codex, OpenAI Responses,
+Anthropic Messages, and explicitly configured OpenAI-compatible endpoints. Its
+verification uses scripted responses and local HTTP servers. It does not claim
+access to a commercial model or compatibility with every custom server.
+
+The full scripted API research-cycle test exercises 25 roles and 61 completions,
+including evolution, ablation-driven refinement, rebuttal, manuscript revision,
+freeze, final evaluation and audit. Its 732 synthetic usage tokens reconcile
+exactly; completed resume adds no calls or experiments. Both provider responses
+and experiment outcomes in this test are synthetic.
+
+Configuration, credentials, schemas, images, timeout, refusal, missing usage,
+failed-call accounting, audit tampering and suite recovery have separate tests.
+The [verification record](provider-verification.json) records the source identity,
+regression results and independent real offline container check. Real API access
+and live research quality remain unverified; no paid calls were made.
+
+On 26 October 2026, the fixed-source regression passed **2,605 tests**, with one
+Linux-only sampler test skipped on macOS and 15 container tests deselected.
+Ruff, the installed-wheel resource check, and a staged credential scan passed.
+The separate real CPU/PaperOrchestra run completed with 15 recorded observations,
+four bundled writing attempts, real PDF operations, audit re-execution, and
+unchanged completed resume. Its agents were scripted and its live-call count was
+zero. The first container attempt used an unshared installation path and failed;
+the same wheel passed after moving its installation into the existing shared
+validation directory. That failed attempt was preserved.
+
+## Bundled-writer release baseline, before API providers
 
 Local release verification passed on **26 October 2026** for version `0.4.0`,
 using a macOS ARM64 controller and Linux ARM64 experiment/PDF containers. The
@@ -29,9 +58,9 @@ deselected container tests. This result validates the declared generated task an
 bundled writing path; it does not establish live agent quality, scientific
 novelty, or coverage of every possible controller branch.
 
-Hosted CI remains pending publication in this record. Consult the
+This record predates the provider extension. Consult the
 [release workflow](https://github.com/duyvuleo/Open-ScientistTwo/actions/workflows/release.yml)
-for its current status. The current source has **not** completed a fresh live
+for checks on each commit. The current source has **not** completed a fresh live
 end-to-end campaign, and full live validation across all 13 testbed slots remains
 unverified.
 

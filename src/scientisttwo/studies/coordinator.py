@@ -195,6 +195,8 @@ class StudyResearchController(ResearchController):
     """The ordinary workflow ends at a selection seal until both arms are ready."""
 
     def run(self):
+        if self.config.provider.kind != "codex":
+            raise ValueError("The paired-study transport currently supports only the Codex provider")
         if not self.store.get("study_plan_ref"):
             raise IntegrityError("Create the paired study plan before starting live research")
         return super().run()

@@ -16,7 +16,7 @@ from ..live.timing import PairedTimingReport
 from ..store import IntegrityError, canonical, digest
 from ..testbed.catalog import RECIPE_VERSION, UPSTREAM_REVISION, get_recipe
 from .minimal_live_acceptance import (
-    MANDATORY_ROLES, _model_accounting, _roles, capture_resume_snapshot,
+    MANDATORY_ROLES, _backend_name, _model_accounting, _roles, capture_resume_snapshot,
 )
 
 
@@ -227,7 +227,7 @@ def verify_native_timing_live(store, *, audit_ref, resume_before_ref, resume_aft
         prepared_contract = _prepared_contract(store, config)
         if (config.engine_version != "research-v2" or config.workflow.writer_backend != "paperorchestra"
                 or config.mode != "research" or config.development.adapter != "testbed"
-                or store.get("live_backend") != {"backend": "codex", "synthetic": False, "model": config.model}):
+                or store.get("live_backend") != {"backend": _backend_name(config), "synthetic": False, "model": config.model}):
             raise IntegrityError("Expected canonical Vectorization audited-v1 native protocol and actual live agents")
         report["task"] = {**prepared_contract, "model": config.model, "development_seeds": config.development.seeds,
             "metric": "latency_ratio", "direction": "minimize"}

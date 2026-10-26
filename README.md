@@ -90,7 +90,8 @@ nor scientific merit.
 - [PaperOrchestra](docs/paperorchestra.md): select the included pinned engine and
   prepare its isolated PDF image, first with scripted agent responses. No second
   source checkout is required.
-- [Live agents](docs/live.md): freeze an explicit model, call limit, token stop
+- [Live agents](docs/live.md): select Codex, OpenAI, Anthropic/Claude, or a
+  [custom compatible endpoint](docs/model-providers.md); freeze an explicit model, call limit, token stop
   threshold, experiment limit, and deadlines; execution requires `--allow-live`.
 - [Benchmark adapters](docs/benchmarks.md): inspect the 13-slot testbed and its
   preparation and evaluation boundaries. Adapter availability does not establish

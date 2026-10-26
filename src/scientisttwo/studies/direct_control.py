@@ -76,6 +76,8 @@ class DirectControl:
 
     def __init__(self, store, config, adapter, backend, runner=None, *, budget=None,
                  allow_live=False):
+        if config.provider.kind != "codex":
+            raise ValueError("The paired-study control currently supports only the Codex provider")
         if len(config.development.seeds) != 3:
             raise ValueError("This study control requires exactly three matched development seeds")
         if not backend.synthetic and not allow_live:

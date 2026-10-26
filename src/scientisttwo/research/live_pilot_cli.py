@@ -5,7 +5,7 @@ import json
 from pathlib import Path
 from typing import Literal
 
-from pydantic import Field
+from pydantic import ConfigDict, Field
 import typer
 
 from ..backends import strict_json_loads
@@ -13,12 +13,14 @@ from ..live.adapters import implementation_identity
 from ..models import Profile, Record, TaskSpec
 from ..store import IntegrityError, Store, canonical, digest
 from .live_pilot import LivePilotOptions, run_live_pilot, resume_live_pilot
+from ..process import run_process
 
 
 app = typer.Typer(no_args_is_help=True, help="Explicit bounded live agents on bundled CPU tasks.")
 
 
 class LivePilotManifest(Record):
+    model_config = ConfigDict(extra="forbid", hide_input_in_errors=True)
     schema_version: Literal["scientisttwo-live-pilot-v1"] = "scientisttwo-live-pilot-v1"
     task: TaskSpec
     profile: Profile
@@ -86,7 +88,8 @@ def run(manifest: Path, output: Path, allow_live: bool = False, executable: str 
             runtime=spec.runtime, image=spec.image, context=spec.context,
             allow_live=True, executable=executable)
         emit({"state": state, "directory": str(store.root),
-              "model_accounting_ref": store.get("live_pilot_model_accounting")})
+              "model_accounting_ref": store.get("api_model_accounting_ref")
+              or store.get("live_pilot_model_accounting")})
         if state.get("status") != "complete":
             raise typer.Exit(2)
 
@@ -101,6 +104,41 @@ def resume(campaign: Path, allow_live: bool = False, executable: str = "codex"):
     with locked_store(campaign) as store:
         state = resume_live_pilot(store, allow_live=True, executable=executable)
         emit({"state": state, "directory": str(store.root),
-              "model_accounting_ref": store.get("live_pilot_model_accounting")})
+              "model_accounting_ref": store.get("api_model_accounting_ref")
+              or store.get("live_pilot_model_accounting")})
         if state.get("status") != "complete":
             raise typer.Exit(2)
+
+
+@app.command("check")
+def check(manifest: Path):
+    """Check the frozen configuration, local credentials and images without inference."""
+    from ..live.cli import check_provider
+    spec = LivePilotManifest.model_validate(strict_json_loads(manifest.read_text()))
+    checks = check_provider(spec.options.provider)
+    checks["implementation_matches"] = spec.implementation == implementation_identity()
+    checks["live_model_calls"] = 0
+    prefix = [spec.runtime] + (["--context", spec.context] if spec.context else [])
+    images = {}
+    wanted = {spec.image}
+    if spec.options.workflow.compiler_image:
+        wanted.add(spec.options.workflow.compiler_image)
+    for image in wanted:
+        try:
+            result = run_process(prefix + ["image", "inspect", image, "--format", "{{.Id}}"], 15)
+            images[image] = result.code == 0 and result.stdout.strip() == image
+        except OSError:
+            images[image] = False
+    checks["images"] = images
+    checks["writer_ready"] = True
+    if spec.options.workflow.writer_backend == "paperorchestra":
+        from ..integrations.paperorchestra.runtime import verify_upstream
+        try:
+            verify_upstream(Path(spec.options.workflow.paperorchestra_root))
+        except (OSError, ValueError):
+            checks["writer_ready"] = False
+    checks["ready"] = bool(checks["provider_ready"] and checks["implementation_matches"]
+                           and checks["writer_ready"] and all(images.values()))
+    emit(checks)
+    if not checks["ready"]:
+        raise typer.Exit(2)
